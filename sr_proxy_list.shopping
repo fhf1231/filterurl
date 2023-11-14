@@ -1,6 +1,4 @@
 #!name=proxy_list shopping
 [Rule]
-DOMAIN,us.shein.com,Proxy
-DOMAIN,temu.com,Proxy
 DOMAIN-SUFFIX,us.shein.com,PROXY
 DOMAIN-SUFFIX,temu.com,PROXY
