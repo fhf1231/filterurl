@@ -30,17 +30,6 @@ host-keyword,ls.apple.com,大陆服务
 host-keyword,gsa.apple.com,大陆服务
 host-keyword,ess.apple.com,大陆服务
 
-# apple tv
-HOST,hls-amt.itunes.apple.com,大陆服务
-HOST,hls.itunes.apple.com,大陆服务
-HOST,np-edge.itunes.apple.com,大陆服务
-HOST,play-edge.itunes.apple.com,大陆服务
-HOST,tv.applemusic.com,大陆服务
-HOST,uts-api.itunes.apple.com,大陆服务
-HOST-SUFFIX,tv.apple.com,大陆服务
-USER-AGENT,大陆服务*,大陆服务
-USER-AGENT,com.apple.tv*,大陆服务
-
 # 微信
 HOST,dl.wechat.com,大陆服务
 HOST,sgfindershort.wechat.com,大陆服务
