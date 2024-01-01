@@ -146,7 +146,7 @@ HOST-KEYWORD,temu.com,海外服务
 USER-AGENT,*temu*,海外服务
 USER-AGENT,temu*,海外服务
 
-# shopping
+# shein
 DOMAIN,us.shein.com,海外服务
 DOMAIN,shein.com,海外服务
 DOMAIN-SUFFIX,us.shein.com,海外服务
