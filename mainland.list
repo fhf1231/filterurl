@@ -1,6 +1,7 @@
 # 大陆服务
 # 更新时间 2023.4.11
 
+
 # Other
 HOST-SUFFIX,mypikpak.com,大陆服务
 HOST,xluser-ssl.xunlei.com,大陆服务
@@ -10,23 +11,24 @@ ip-cidr, 192.168.1.1/24,大陆服务
 host-keyword, anti-ad.net,大陆服务
 HOST,sdkapp.uve.weibo.com,大陆服务
 
+
 # 苹果服务
-host-keyword, push.apple.com,大陆服务
-host, time.apple.com,大陆服务
-host-keyword, weather-edge.apple.com,大陆服务
-host-keyword, weather-adge.apple.com,大陆服务
-host-keyword, buy.itunes.apple.com,大陆服务
-host-keyword, icloud.com,大陆服务
-host-keyword, api.smoot.apple.com,大陆服务
-host-keyword, api.smoot.apple.cn,大陆服务
-host, init.ess.apple.com,大陆服务
-host-keyword, ssl.apple.com,大陆服务
-host-keyword, humb.apple.com,大陆服务
-host, smp-device-content.apple.com,大陆服务
-host-keyword, api-adservices.apple.com,大陆服务
-host-keyword, ls.apple.com,大陆服务
-host-keyword, gsa.apple.com,大陆服务
-host-keyword, ess.apple.com,大陆服务
+host-keyword,push.apple.com,大陆服务
+host,time.apple.com,大陆服务
+host-keyword,weather-edge.apple.com,大陆服务
+host-keyword,weather-adge.apple.com,大陆服务
+host-keyword,buy.itunes.apple.com,大陆服务
+host-keyword,icloud.com,大陆服务
+host-keyword,api.smoot.apple.com,大陆服务
+host-keyword,api.smoot.apple.cn,大陆服务
+host,init.ess.apple.com,大陆服务
+host-keyword,ssl.apple.com,大陆服务
+host-keyword,humb.apple.com,大陆服务
+host,smp-device-content.apple.com,大陆服务
+host-keyword,api-adservices.apple.com,大陆服务
+host-keyword,ls.apple.com,大陆服务
+host-keyword,gsa.apple.com,大陆服务
+host-keyword,ess.apple.com,大陆服务
 
 # apple tv
 HOST,hls-amt.itunes.apple.com,大陆服务
