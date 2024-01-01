@@ -13,12 +13,14 @@ HOST-SUFFIX,servers.xeton.dev,海外服务
 IP-CIDR,38.94.111.242/32,海外服务
 IP-CIDR,38.94.111.242/22,海外服务
 
+
 # > UA
 USER-AGENT,%E7%BA%BD%E7%BA%A6%E6%97%B6%E6%8A%A5*,海外服务
 USER-AGENT,AwemeI18n*,海外服务
 USER-AGENT,Coinbase*,海外服务
 USER-AGENT,Instagram*,海外服务
 USER-AGENT,Resilio Sync*,海外服务
+USER-AGENT,WhatsApp*,海外服务
 
 # > Google Voice
 HOST,voice.telephony.goog,海外服务
@@ -45,6 +47,25 @@ DOMAIN-SUFFIX,openaicom.imgix.net,海外服务
 DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net,海外服务
 DOMAIN-SUFFIX,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,海外服务
 DOMAIN-KEYWORD,openai,海外服务
+
+# > copilot
+DOMAIN,api.msn.com,海外服务
+DOMAIN,assets.msn.com,海外服务
+DOMAIN,dealczars.bing-shopping.microsoft-falcon.io,海外服务
+DOMAIN,gateway.bingviz.microsoftapp.net,海外服务
+DOMAIN,location.microsoft.com,海外服务
+DOMAIN,login.microsoftonline.com,海外服务
+DOMAIN,self.events.data.microsoft.com,海外服务
+DOMAIN,services.bingapis.com,海外服务
+DOMAIN,shopping.bing-shopping.microsoft-falcon.io,海外服务
+DOMAIN,sapphire.api.microsoftapp.net,海外服务
+DOMAIN,sr.bing.com,海外服务
+DOMAIN,sydney.bing.com,海外服务
+DOMAIN,ssl.bing.com,海外服务
+DOMAIN,th.bing.com,海外服务
+DOMAIN,www.bing.com,海外服务
+DOMAIN,www.bingapis.com,海外服务
+
 
 # > Line
 HOST-SUFFIX,lin.ee,海外服务
@@ -85,6 +106,7 @@ HOST-SUFFIX,steamstatic.com,海外服务
 # > HOST-SUFFIX,tik-tokapi.com,海外服务
 # > HOST-SUFFIX,api.tiktokv.com,海外服务
 
+
 # > Zooba
 USER-AGENT,battleroyale*,海外服务
 
@@ -117,12 +139,18 @@ HOST-SUFFIX,bet365.com,海外服务
 IP-CIDR,5.226.179.10/22,海外服务
 
 # > temu
+DOMAIN,temu.com,海外服务
 HOST-SUFFIX,temu.com,海外服务
 HOST-KEYWORD,-temucom,海外服务
 HOST-KEYWORD,temu.com,海外服务
 USER-AGENT,*temu*,海外服务
 USER-AGENT,temu*,海外服务
- 
+
+# shopping
+DOMAIN,us.shein.com,海外服务
+DOMAIN,shein.com,海外服务
+DOMAIN-SUFFIX,us.shein.com,海外服务
+
 #Discord
 HOST-SUFFIX,discord.co,海外服务
 HOST-SUFFIX,discord.com,海外服务
@@ -158,12 +186,52 @@ USER-AGENT,*Spotify*,海外服务
 USER-AGENT,Spotify*,海外服务
 IP-CIDR,35.186.224.47/32,海外服务
 
-# > YouTubeMusic
+# > YouTube 
+USER-AGENT,*youtube*,海外服务
+USER-AGENT,YouTube*,海外服务
+HOST-KEYWORD,youtube,海外服务
+HOST,yt3.ggpht.com,海外服务
+HOST-SUFFIX,googlevideo.com,海外服务
+HOST-SUFFIX,gvt2.com,海外服务
+HOST-SUFFIX,youtu.be,海外服务
+HOST,youtubei.googleapis.com,海外服务
+HOST-SUFFIX,ytimg.com,海外服务
+
+#> YouTubeMusic
 HOST,music.youtube.com,海外服务
 USER-AGENT,*YouTubeMusic*,海外服务
 USER-AGENT,*com.google.ios.youtubemusic*,海外服务
 USER-AGENT,YouTubeMusic*,海外服务
 USER-AGENT,com.google.ios.youtubemusic*,海外服务
+
+#Twitter
+HOST-SUFFIX,ads-twitter.com,海外服务
+HOST-SUFFIX,periscope.tv,海外服务
+HOST-SUFFIX,pscp.tv,海外服务
+HOST-SUFFIX,t.co,海外服务
+HOST-SUFFIX,tellapart.com,海外服务
+HOST-SUFFIX,tweetdeck.com,海外服务
+HOST-SUFFIX,twimg.co,海外服务
+HOST-SUFFIX,twimg.com,海外服务
+HOST-SUFFIX,twimg.org,海外服务
+HOST-SUFFIX,twitpic.com,海外服务
+HOST-SUFFIX,twitter.com,海外服务
+HOST-SUFFIX,twitter.jp,海外服务
+HOST-SUFFIX,twitterinc.com,海外服务
+HOST-SUFFIX,twitteroauth.com,海外服务
+HOST-SUFFIX,twitterstat.us,海外服务
+HOST-SUFFIX,twtrdns.net,海外服务
+HOST-SUFFIX,twttr.com,海外服务
+HOST-SUFFIX,vine.co,海外服务
+HOST-KEYWORD,twitter,海外服务
+IP-CIDR,104.244.42.0/21,海外服务
+IP-CIDR,192.133.76.0/22,海外服务
+IP-CIDR,199.16.156.0/22,海外服务
+IP-CIDR,199.59.148.0/22,海外服务
+IP-CIDR,199.96.56.0/21,海外服务
+IP-CIDR,202.160.128.0/22,海外服务
+IP-CIDR,209.237.192.0/19,海外服务
+IP-CIDR,69.195.160.0/19,海外服务
 
 # > Top blocked sites
 HOST-SUFFIX,2o7.net,海外服务
@@ -181,6 +249,9 @@ HOST-SUFFIX,aerisapi.com,海外服务
 HOST-SUFFIX,airtable.com,海外服务
 HOST-SUFFIX,alfredapp.com,海外服务
 HOST-SUFFIX,allconnected.co,海外服务
+HOST-SUFFIX,amazon.co,海外服务
+HOST-SUFFIX,amazon.com,海外服务
+HOST-SUFFIX,amazonaws.com,海外服务
 HOST-SUFFIX,ampproject.com,海外服务
 HOST-SUFFIX,ampproject.net,海外服务
 HOST-SUFFIX,ampproject.org,海外服务
@@ -752,6 +823,9 @@ HOST-KEYWORD,dropbox,海外服务
 HOST-KEYWORD,facebook,海外服务
 HOST-KEYWORD,github,海外服务
 HOST-KEYWORD,instagram,海外服务
+HOST-KEYWORD,twitter,海外服务
+HOST-KEYWORD,whatsapp,海外服务
+HOST-KEYWORD,google,海外服务
 HOST-SUFFIX,1e100.net,海外服务
 HOST-SUFFIX,2mdn.net,海外服务
 HOST-SUFFIX,abc.xyz,海外服务
@@ -799,6 +873,24 @@ HOST-SUFFIX,webmproject.org,海外服务
 HOST-SUFFIX,webrtc.org,海外服务
 HOST-KEYWORD,dlercloud,海外服务
 
+# > Amazon
+IP-CIDR,13.32.0.0/16,海外服务
+IP-CIDR,13.33.0.0/16,海外服务
+IP-CIDR,13.35.0.0/17,海外服务
+IP-CIDR,18.184.0.0/15,海外服务
+IP-CIDR,18.194.0.0/15,海外服务
+IP-CIDR,18.208.0.0/13,海外服务
+IP-CIDR,18.232.0.0/14,海外服务
+IP-CIDR,52.200.0.0/13,海外服务
+IP-CIDR,52.58.0.0/15,海外服务
+IP-CIDR,52.74.0.0/16,海外服务
+IP-CIDR,52.77.0.0/16,海外服务
+IP-CIDR,52.84.0.0/15,海外服务
+IP-CIDR,54.156.0.0/14,海外服务
+IP-CIDR,54.226.0.0/15,海外服务
+IP-CIDR,54.230.156.0/22,海外服务
+IP-CIDR,54.93.0.0/16,海外服务
+
 # > Facebook
 IP-CIDR,103.4.96.0/22,海外服务
 IP-CIDR,129.134.0.0/17,海外服务
@@ -815,6 +907,10 @@ IP-CIDR,66.220.144.0/20,海外服务
 IP-CIDR,69.171.224.0/19,海外服务
 IP-CIDR,69.63.176.0/20,海外服务
 IP-CIDR,74.119.76.0/22,海外服务
+
+# > Google
+IP-CIDR,173.194.0.0/16,海外服务
+IP-CIDR,74.125.0.0/16,海外服务
 
 # > Kakao Talk
 IP-CIDR,1.201.0.0/24,海外服务
@@ -1086,6 +1182,7 @@ HOST-SUFFIX,venmo.com,海外服务
 HOST-SUFFIX,venmo.info,海外服务
 HOST-SUFFIX,venmo.net,海外服务
 HOST-SUFFIX,venmo.org,海外服务
+HOST-SUFFIX,venmo.s3.amazonaws.com,海外服务
 HOST-SUFFIX,webmoneyinfo.com,海外服务
 HOST-SUFFIX,wiremoneytoirelandwithxoomeasierandcheaper.com,海外服务
 HOST-SUFFIX,www-paypal.info,海外服务
@@ -1577,10 +1674,16 @@ HOST-SUFFIX,t.me,海外服务
 HOST-SUFFIX,tdesktop.com,海外服务
 HOST-SUFFIX,telega.one,海外服务
 HOST-SUFFIX,telegra.ph,海外服务
+HOST-SUFFIX,telegram.dog,海外服务
+HOST-SUFFIX,telegram.me,海外服务
+HOST-SUFFIX,telegram.org,海外服务
+HOST-SUFFIX,telegram.space,海外服务
+HOST-SUFFIX,telegramdownload.com,海外服务
 HOST-SUFFIX,telesco.pe,海外服务
 HOST-SUFFIX,tg.dev,海外服务
 HOST-SUFFIX,tx.me,海外服务
 HOST-KEYWORD,nicegram,海外服务
+HOST-KEYWORD,telegram,海外服务
 IP-CIDR,109.239.140.0/24,海外服务
 IP-CIDR,149.154.160.0/20,海外服务
 IP-CIDR,205.172.60.0/22,海外服务
@@ -1595,6 +1698,7 @@ IP6-CIDR,2001:b28:f242::/48,海外服务
 
 #clubhouse
 HOST,clubhouse.pubnub.com,海外服务
+HOST,clubhouseprod.s3.amazonaws.com,海外服务
 HOST-SUFFIX,clubhouseapi.com,海外服务
 HOST-SUFFIX,joinclubhouse.com,海外服务
 IP-CIDR,103.65.41.130/32,海外服务
@@ -1745,6 +1849,7 @@ IP-CIDR,69.28.51.148/32,海外服务
 
 HOST,api.okzy.tv,海外服务
 HOST,apple.comscoreresearch.com,海外服务
+HOST,atv-ps.amazon.com,海外服务
 HOST,avodmp4s3ww-a.akamaihd.net,海外服务
 HOST,bcbolt446c5271-a.akamaihd.net,海外服务
 HOST,cbsi.live.ott.irdeto.com,海外服务
@@ -1752,6 +1857,7 @@ HOST,cbsplaylistserver.aws.syncbak.com,海外服务
 HOST,cbsservice.aws.syncbak.com,海外服务
 HOST,content.jwplatform.com,海外服务
 HOST,edge.api.brightcove.com,海外服务
+HOST,fls-na.amazon.com,海外服务
 HOST,foxsports01-i.akamaihd.net,海外服务
 HOST,foxsports02-i.akamaihd.net,海外服务
 HOST,foxsports03-i.akamaihd.net,海外服务
@@ -1761,14 +1867,21 @@ HOST,hboasia2-i.akamaihd.net,海外服务
 HOST,hboasia3-i.akamaihd.net,海外服务
 HOST,hboasia4-i.akamaihd.net,海外服务
 HOST,hboasia5-i.akamaihd.net,海外服务
+HOST,itvpnpmobile-a.akamaihd.net,海外服务
 HOST,kktv-theater.kk.stream,海外服务
+HOST,linear.tv.apple.com,海外服务
 HOST,mytvsuperlimited.hb.omtrdc.net,海外服务
 HOST,mytvsuperlimited.sc.omtrdc.net,海外服务
+HOST,netflix.com.edgesuite.net,海外服务
 HOST,news-client.apple.com,海外服务
 HOST,news-edge.apple.com,海外服务
+HOST,news-events.apple.com,海外服务
+HOST,np-edge.itunes.apple.com,海外服务
+HOST,play-edge.itunes.apple.com,海外服务
 HOST,players.brightcove.net,海外服务
 HOST,rpg.pic-imges.com,海外服务
 HOST,videos-f.jwpsrv.com,海外服务
+#HOST,youtubei.googleapis.com,海外服务
 HOST,yt3.ggpht.com,海外服务
 HOST-SUFFIX,5itv.tv,海外服务
 HOST-SUFFIX,abema.io,海外服务
@@ -1777,6 +1890,9 @@ HOST-SUFFIX,adobedtm.com,海外服务
 HOST-SUFFIX,aiv-cdn.net,海外服务
 HOST-SUFFIX,aiv-delivery.net,海外服务
 HOST-SUFFIX,akamaized.net,海外服务
+HOST-SUFFIX,amazonaws.co.uk,海外服务
+HOST-SUFFIX,amazonaws.com,海外服务
+HOST-SUFFIX,amazonvideo.com,海外服务
 HOST-SUFFIX,ameba.jp,海外服务
 HOST-SUFFIX,api.segment.io,海外服务
 HOST-SUFFIX,apple.news,海外服务
@@ -1808,6 +1924,13 @@ HOST-SUFFIX,dazn-api.com,海外服务
 HOST-SUFFIX,dazn.com,海外服务
 HOST-SUFFIX,dazndn.com,海外服务
 HOST-SUFFIX,deezer.com,海外服务
+HOST-SUFFIX,disney-plus.net,海外服务
+HOST-SUFFIX,disney-portal.my.onetrust.com,海外服务
+HOST-SUFFIX,disney.demdex.net,海外服务
+HOST-SUFFIX,disneyplus.bn5x.net,海外服务
+HOST-SUFFIX,disneyplus.com,海外服务
+HOST-SUFFIX,disneyplus.com.ssl.sc.omtrdc.net,海外服务
+HOST-SUFFIX,disneystreaming.com,海外服务
 HOST-SUFFIX,dmc.nico,海外服务
 HOST-SUFFIX,dmm-extension.com,海外服务
 HOST-SUFFIX,dmm.co.jp,海外服务
@@ -1877,12 +2000,25 @@ HOST-SUFFIX,kktv.me,海外服务
 HOST-SUFFIX,linetv.tw,海外服务
 HOST-SUFFIX,litv.tv,海外服务
 HOST-SUFFIX,llnwd.net,海外服务
+HOST-SUFFIX,media-amazon.com,海外服务
 HOST-SUFFIX,mstage.io,海外服务
 HOST-SUFFIX,muscdn.com,海外服务
 HOST-SUFFIX,musical.ly,海外服务
 HOST-SUFFIX,my5.tv,海外服务
 HOST-SUFFIX,mytvsuper.com,海外服务
 HOST-SUFFIX,naver.com,海外服务
+HOST-SUFFIX,netflix.com,海外服务
+HOST-SUFFIX,netflix.net,海外服务
+HOST-SUFFIX,netflixdnstest0.com,海外服务
+HOST-SUFFIX,netflixdnstest1.com,海外服务
+HOST-SUFFIX,netflixdnstest2.com,海外服务
+HOST-SUFFIX,netflixdnstest3.com,海外服务
+HOST-SUFFIX,netflixdnstest4.com,海外服务
+HOST-SUFFIX,netflixdnstest5.com,海外服务
+HOST-SUFFIX,netflixdnstest6.com,海外服务
+HOST-SUFFIX,netflixdnstest7.com,海外服务
+HOST-SUFFIX,netflixdnstest8.com,海外服务
+HOST-SUFFIX,netflixdnstest9.com,海外服务
 HOST-SUFFIX,nflxext.com,海外服务
 HOST-SUFFIX,nflximg.com,海外服务
 HOST-SUFFIX,nflximg.net,海外服务
@@ -1923,6 +2059,7 @@ HOST-SUFFIX,tidal.com,海外服务
 HOST-SUFFIX,tidal.comdia,海外服务
 HOST-SUFFIX,tidalhifi.com,海外服务
 HOST-SUFFIX,ttvnw.net,海外服务
+HOST-SUFFIX,tv.apple.com,海外服务
 HOST-SUFFIX,tvb.com,海外服务
 HOST-SUFFIX,tver.jp,海外服务
 HOST-SUFFIX,twitch.tv,海外服务
@@ -1963,6 +2100,8 @@ USER-AGENT,BBCBeacon*,海外服务
 USER-AGENT,BBCiPlayer*,海外服务
 USER-AGENT,DAZN*,海外服务
 USER-AGENT,Deezer*,海外服务
+USER-AGENT,Disney*,海外服务
+USER-AGENT,Disney+*,海外服务
 USER-AGENT,FOX%20NOW*,海外服务
 USER-AGENT,FOXPlus*,海外服务
 USER-AGENT,HBO%20GO%20PROD%20HKG*,海外服务
