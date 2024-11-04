@@ -1,3 +1,8 @@
+HOST-SUFFIX,yt3.ggpht.com,广告
+HOST-SUFFIX,youtube.googleapis.com,广告
+HOST-SUFFIX,youtube.com/ads,广告
+HOST-SUFFIX,ads.youtube.com,广告
+HOST-SUFFIX,video-stats.youtube.com,广告
 HOST-SUFFIX,ade.googlesyndication.com,广告
 HOST-SUFFIX,googleads.g.doubleclick.net,广告
 HOST-SUFFIX,googlesyndication.com,广告
@@ -5,3 +10,4 @@ HOST-SUFFIX,adservices.google.com,广告
 HOST-SUFFIX,adwords.google.com,广告
 HOST-SUFFIX,pagead2.googlesyndication.com,广告
 HOST-SUFFIX,googleadservices.com,广告
+
