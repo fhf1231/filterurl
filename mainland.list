@@ -31,6 +31,7 @@ host-keyword,gsa.apple.com,大陆服务
 host-keyword,ess.apple.com,大陆服务
 
 # 微信
+HOST,pull-m1.wxlivecdn.com,大陆服务
 HOST,dl.wechat.com,大陆服务
 HOST,sgfindershort.wechat.com,大陆服务
 HOST,sgilinkshort.wechat.com,大陆服务
@@ -40,6 +41,7 @@ HOST,sgshort.wechat.com,大陆服务
 HOST,tencentmap.wechat.com,大陆服务
 HOST-SUFFIX,qlogo.cn,大陆服务
 HOST-SUFFIX,qpic.cn,大陆服务
+HOST-SUFFIX,wxlivecdn.com,大陆服务
 HOST-SUFFIX,servicewechat.com,大陆服务
 HOST-SUFFIX,tenpay.com,大陆服务
 HOST-SUFFIX,wechat.com,大陆服务
