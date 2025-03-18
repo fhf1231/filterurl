@@ -39,8 +39,8 @@ HOST-SUFFIX,adservice.google.*,广告
 # 4. YouTube 广告
 HOST-SUFFIX,ads.youtube.com,广告
 HOST-SUFFIX,video-stats.youtube.com,广告
-HOST-SUFFIX,www.youtube.com,广告,match=/youtubei/v1/player/ad_break
-HOST-SUFFIX,www.youtube.com,广告,match=/api/stats/ads
+HOST-SUFFIX,www.youtube.com,广告
+HOST-SUFFIX,www.youtube.com,广告
 
 # 5. 其他 Google 广告服务
 HOST-SUFFIX,admob.googleapis.com,广告
