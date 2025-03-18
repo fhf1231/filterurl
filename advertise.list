@@ -13,7 +13,7 @@ HOST-SUFFIX,static.doubleclick.net,广告
 HOST-SUFFIX,googleads4.g.doubleclick.net,广告
 HOST-SUFFIX,adclick.g.doubleclick.net,广告
 HOST-SUFFIX,cm.g.doubleclick.net,广告
-HOST-SUFFIX,*.doubleclick.net,广告
+HOST-SUFFIX,doubleclick.net,广告
 
 # 2. Google Syndication 广告
 HOST-SUFFIX,video-ad.googlesyndication.com,广告
@@ -21,7 +21,7 @@ HOST-SUFFIX,pagead2.googlesyndication.com,广告
 HOST-SUFFIX,tpc.googlesyndication.com,广告
 HOST-SUFFIX,ade.googlesyndication.com,广告
 HOST-SUFFIX,googlesyndication.com,广告
-HOST-SUFFIX,*.googlesyndication.com,广告
+HOST-SUFFIX,googlesyndication.com,广告
 
 # 3. Google Ad Services
 HOST-SUFFIX,googleadservices.com,广告
