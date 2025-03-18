@@ -1,52 +1,36 @@
-# Quantumult X 广告过滤规则集
-# 目标：屏蔽 Google 和 YouTube 广告
-# 日期：2025年3月18日
-# 注意：将此文件保存为 .conf 格式并导入 Quantumult X
-
-# 1. Google DoubleClick 广告
 HOST-SUFFIX,ad.doubleclick.net,广告
 HOST-SUFFIX,googleads.g.doubleclick.net,广告
 HOST-SUFFIX,pagead.l.doubleclick.net,广告
 HOST-SUFFIX,pubads.g.doubleclick.net,广告
-HOST-SUFFIX,securepubads.g.doubleclick.net,广告
-HOST-SUFFIX,static.doubleclick.net,广告
-HOST-SUFFIX,googleads4.g.doubleclick.net,广告
-HOST-SUFFIX,adclick.g.doubleclick.net,广告
-HOST-SUFFIX,cm.g.doubleclick.net,广告
-HOST-SUFFIX,doubleclick.net,广告
-
-# 2. Google Syndication 广告
 HOST-SUFFIX,video-ad.googlesyndication.com,广告
 HOST-SUFFIX,pagead2.googlesyndication.com,广告
 HOST-SUFFIX,tpc.googlesyndication.com,广告
-HOST-SUFFIX,ade.googlesyndication.com,广告
-HOST-SUFFIX,googlesyndication.com,广告
-HOST-SUFFIX,googlesyndication.com,广告
-
-# 3. Google Ad Services
-HOST-SUFFIX,googleadservices.com,广告
-HOST-SUFFIX,adservice.google.com,广告
+HOST-SUFFIX,googleads4.g.doubleclick.net,广告
+HOST-SUFFIX,static.doubleclick.net,广告
 HOST-SUFFIX,www.googleadservices.com,广告
-HOST-SUFFIX,partner.googleadservices.com,广告
-HOST-SUFFIX,adservices.google.com,广告
-HOST-SUFFIX,adwords.google.com,广告
+HOST-SUFFIX,securepubads.g.doubleclick.net,广告
+HOST-SUFFIX,adservice.google.com,广告
 HOST-SUFFIX,adservice.google.co.in,广告
 HOST-SUFFIX,adservice.google.co.uk,广告
 HOST-SUFFIX,adservice.google.com.au,广告
 HOST-SUFFIX,adservice.google.de,广告
-HOST-SUFFIX,adservice.google.*,广告
-
-# 4. YouTube 广告
+HOST-SUFFIX,partner.googleadservices.com,广告
 HOST-SUFFIX,ads.youtube.com,广告
-HOST-SUFFIX,video-stats.youtube.com,广告
-HOST-SUFFIX,www.youtube.com,广告
-HOST-SUFFIX,www.youtube.com,广告
-
-# 5. 其他 Google 广告服务
-HOST-SUFFIX,admob.googleapis.com,广告
-HOST-SUFFIX,adserver.google.com,广告
 HOST-SUFFIX,ads.google.com,广告
+HOST-SUFFIX,ads-api.tiktokv.com,广告
+HOST-SUFFIX,adserver.google.com,广告
+HOST-SUFFIX,admob.googleapis.com,广告
 HOST-SUFFIX,ads.yieldmanager.com,广告
 HOST-SUFFIX,optimized-by.rubiconproject.com,广告
 HOST-SUFFIX,ads.pubmatic.com,广告
 HOST-SUFFIX,adserver.pubmatic.com,广告
+HOST-SUFFIX,adclick.g.doubleclick.net,广告
+HOST-SUFFIX,cm.g.doubleclick.net,广告
+HOST-SUFFIX,yt3.ggpht.com,广告
+HOST-SUFFIX,youtube.googleapis.com,广告
+HOST-SUFFIX,video-stats.youtube.com,广告
+HOST-SUFFIX,ade.googlesyndication.com,广告
+HOST-SUFFIX,googlesyndication.com,广告
+HOST-SUFFIX,adservices.google.com,广告
+HOST-SUFFIX,adwords.google.com,广告
+HOST-SUFFIX,googleadservices.com,广告 
