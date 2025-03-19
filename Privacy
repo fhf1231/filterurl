@@ -52,15 +52,14 @@ DOMAIN,analytics.slashdotmedia.com, Privacy
 DOMAIN,zgsdk.zhugeio.com, Privacy
 
 > 51.LA
-DOMAIN,js.users.51.la, Privacy
-DOMAIN,mc.51.la, Privacy
-DOMAIN,sdk.51.la, Privacy
-DOMAIN,wc.51.la, Privacy
+DOMAIN,js.users.51.la,Privacy
+DOMAIN,mc.51.la,Privacy
+DOMAIN,sdk.51.la,Privacy
+DOMAIN,wc.51.la,Privacy
 
 > 58
-DOMAIN,track.58.com, Privacy
-DOMAIN,tracklog.58.com, Privacy
-
+DOMAIN,track.58.com,Privacy
+DOMAIN,tracklog.58.com,Privacy
 > Antiy
 DOMAIN,miav-cse.avlyun.com, Privacy
 DOMAIN,miui-fxcse.avlyun.com, Privacy
