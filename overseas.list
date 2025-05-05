@@ -26,7 +26,6 @@ HOST-KEYWORD,generativelanguage,海外服务
 # > ChatGPT
 DOMAIN,cdn.auth0.com,海外服务
 DOMAIN,o33249.ingest.sentry.io,海外服务
-DOMAIN-SUFFIX,,海外服务
 DOMAIN-SUFFIX,ai.com,海外服务
 DOMAIN-SUFFIX,auth0.com,海外服务
 DOMAIN-SUFFIX,challenges.cloudflare.com,海外服务
