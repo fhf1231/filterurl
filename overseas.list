@@ -1,34 +1,32 @@
 #海外服务
 
-# > Emby
-HOST-SUFFIX,emby-cf.plusmedia.site,海外服务
-HOST-SUFFIX,tv.emby.media,海外服务
-HOST-SUFFIX,emby.media,海外服务
-HOST-SUFFIX,emby.media,海外服务
-HOST-SUFFIX,emby.xeton.dev,海外服务
-HOST-SUFFIX,tv.emby.neko.re,海外服务
-HOST-SUFFIX,jellyfin.xeton.dev,海外服务
-HOST-SUFFIX,movie.xeton.dev,海外服务
-HOST-SUFFIX,servers.xeton.dev,海外服务
-IP-CIDR,38.94.111.242/32,海外服务
-IP-CIDR,38.94.111.242/22,海外服务
+# > Grok xAI
+DOMAIN,grok.com,海外服务
+DOMAIN-SUFFIX,x.ai,海外服务
+DOMAIN-SUFFIX,grok.x.ai,海外服务
+DOMAIN-SUFFIX,api.x.ai,海外服务
+DOMAIN-KEYWORD,grok,海外服务
+DOMAIN-KEYWORD,xai,海外服务
 
-
-# > UA
-USER-AGENT,%E7%BA%BD%E7%BA%A6%E6%97%B6%E6%8A%A5*,海外服务
-USER-AGENT,AwemeI18n*,海外服务
-USER-AGENT,Coinbase*,海外服务
-USER-AGENT,Instagram*,海外服务
-USER-AGENT,Resilio Sync*,海外服务
-USER-AGENT,WhatsApp*,海外服务
-
-# > Google Voice
-HOST,voice.telephony.goog,海外服务
+# > gemini
+HOST,ai.google.dev,海外服务
+HOST,alkalimakersuite-pa.clients6.google.com,海外服务
+HOST,makersuite.google.com,海外服务
+HOST-SUFFIX,bard.google.com,海外服务
+HOST-SUFFIX,deepmind.com,海外服务
+HOST-SUFFIX,deepmind.google,海外服务
+HOST-SUFFIX,gemini.google.com,海外服务
+HOST-SUFFIX,generativeai.google,海外服务
+HOST-SUFFIX,proactivebackend-pa.googleapis.com,海外服务
+HOST-SUFFIX,apis.google.com,海外服务
+HOST-KEYWORD,colab,海外服务
+HOST-KEYWORD,developerprofiles,海外服务
+HOST-KEYWORD,generativelanguage,海外服务
 
 # > ChatGPT
 DOMAIN,cdn.auth0.com,海外服务
 DOMAIN,o33249.ingest.sentry.io,海外服务
-DOMAIN-SUFFIX,chatgpt.com,海外服务
+DOMAIN-SUFFIX,,海外服务
 DOMAIN-SUFFIX,ai.com,海外服务
 DOMAIN-SUFFIX,auth0.com,海外服务
 DOMAIN-SUFFIX,challenges.cloudflare.com,海外服务
@@ -68,6 +66,30 @@ DOMAIN,th.bing.com,海外服务
 DOMAIN,www.bing.com,海外服务
 DOMAIN,www.bingapis.com,海外服务
 
+# > Emby
+HOST-SUFFIX,emby-cf.plusmedia.site,海外服务
+HOST-SUFFIX,tv.emby.media,海外服务
+HOST-SUFFIX,emby.media,海外服务
+HOST-SUFFIX,emby.media,海外服务
+HOST-SUFFIX,emby.xeton.dev,海外服务
+HOST-SUFFIX,tv.emby.neko.re,海外服务
+HOST-SUFFIX,jellyfin.xeton.dev,海外服务
+HOST-SUFFIX,movie.xeton.dev,海外服务
+HOST-SUFFIX,servers.xeton.dev,海外服务
+IP-CIDR,38.94.111.242/32,海外服务
+IP-CIDR,38.94.111.242/22,海外服务
+
+
+# > UA
+USER-AGENT,%E7%BA%BD%E7%BA%A6%E6%97%B6%E6%8A%A5*,海外服务
+USER-AGENT,AwemeI18n*,海外服务
+USER-AGENT,Coinbase*,海外服务
+USER-AGENT,Instagram*,海外服务
+USER-AGENT,Resilio Sync*,海外服务
+USER-AGENT,WhatsApp*,海外服务
+
+# > Google Voice
+HOST,voice.telephony.goog,海外服务
 
 # > Line
 HOST-SUFFIX,lin.ee,海外服务
