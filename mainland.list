@@ -1,7 +1,6 @@
 # 大陆服务
 # 更新时间 2023.4.11
 
-
 # Other
 HOST-SUFFIX,mypikpak.com,大陆服务
 HOST,xluser-ssl.xunlei.com,大陆服务
@@ -10,7 +9,6 @@ ip-cidr, 192.168.0.1/24,大陆服务
 ip-cidr, 192.168.1.1/24,大陆服务
 host-keyword, anti-ad.net,大陆服务
 HOST,sdkapp.uve.weibo.com,大陆服务
-
 
 # 苹果服务
 host-keyword,push.apple.com,大陆服务
@@ -31,6 +29,7 @@ host-keyword,gsa.apple.com,大陆服务
 host-keyword,ess.apple.com,大陆服务
 
 # 微信
+HOST,mlvbdc.live.tlivesource.com,大陆服务
 HOST,pull-m1.wxlivecdn.com,大陆服务
 HOST,dl.wechat.com,大陆服务
 HOST,sgfindershort.wechat.com,大陆服务
@@ -39,6 +38,7 @@ HOST,sglong.wechat.com,大陆服务
 HOST,sgminorshort.wechat.com,大陆服务
 HOST,sgshort.wechat.com,大陆服务
 HOST,tencentmap.wechat.com,大陆服务
+HOST-SUFFIX,tlivesource.com,大陆服务
 HOST-SUFFIX,qlogo.cn,大陆服务
 HOST-SUFFIX,qpic.cn,大陆服务
 HOST-SUFFIX,wxlivecdn.com,大陆服务
