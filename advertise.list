@@ -63,9 +63,7 @@ HOST-SUFFIX,pagead.google.com,广告
 HOST-SUFFIX,analytics.youtube.com,广告
 # → 作用：用户停留时间、互动分析上报
 
-# 🪪 登录身份与广告个性验证
-HOST-SUFFIX,client-channel.google.com,广告
-# → 作用：跨服务广告识别接口，避免身份跟踪
+
 
 # 🧭 移动端广告推荐API
 HOST-SUFFIX,m.youtube.com,广告
@@ -89,14 +87,15 @@ HOST-SUFFIX,metrics.youtube.com,广告
 HOST-SUFFIX,ytimg.l.google.com,广告
 HOST-SUFFIX,ytstatic.l.google.com,广告
 
-# ================================
-# 🔹 第四部分：建议策略组绑定
-# ================================
-# 建议在 Quantumult X 中创建策略组：
-# [policy]
-# Advertising_Block = reject, direct
-#广告
-# 然后在 [filter_local] 中统一绑定规则：
-# FINAL,Advertising_Block
+HOST-SUFFIX,googleadservices.com,广告
+HOST-SUFFIX,google-analytics.com,广告
+HOST-SUFFIX,ssl.google-analytics.com,广告
+HOST-SUFFIX,tagmanager.google.com,广告
+HOST-SUFFIX,admob.googleapis.com,广告
+
+# 🪪 登录身份与广告个性验证
+HOST-SUFFIX,client-channel.google.com,广告
+# → 作用：跨服务广告识别接口，避免身份跟踪
+
 
 
