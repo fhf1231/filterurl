@@ -68,7 +68,7 @@ HOST-SUFFIX,client-channel.google.com,广告
 # → 作用：跨服务广告识别接口，避免身份跟踪
 
 # 🧭 移动端广告推荐API
-HOST-SUFFIX,m.youtube.com/api/stats/ads,广告
+HOST-SUFFIX,m.youtube.com,广告
 # → 作用：屏蔽移动端插播广告统计调用
 
 # 🌐 广告缩略图CDN
@@ -98,3 +98,4 @@ HOST-SUFFIX,ytstatic.l.google.com,广告
 #广告
 # 然后在 [filter_local] 中统一绑定规则：
 # FINAL,Advertising_Block
+
