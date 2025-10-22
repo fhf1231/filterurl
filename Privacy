@@ -196,6 +196,10 @@ DOMAIN-SUFFIX,weather-analytics.apple.com,Privacy
 DOMAIN-SUFFIX,maps-analytics.apple.com,Privacy
 DOMAIN-SUFFIX,news-analytics.apple.com,Privacy
 DOMAIN-SUFFIX,stocks-analytics-events.apple.com,Privacy
+DOMAIN,app-analytics-services.com,Privacy
+DOMAIN,amp-api-edge.apps.apple.com,Privacy
+DOMAIN,browser-intake-datadoghq.com,Privacy
+
 
 
 
