@@ -34,3 +34,67 @@ HOST-SUFFIX,googlesyndication.com,广告
 HOST-SUFFIX,adservices.google.com,广告
 HOST-SUFFIX,adwords.google.com,广告
 HOST-SUFFIX,googleadservices.com,广告 
+
+# 🎯 YouTube 广告与视频流接口
+HOST-SUFFIX,youtubei.googleapis.com,广告
+# → 作用：视频广告控制API，屏蔽前贴片、插播广告配置请求
+
+# 📊 推荐算法与行为追踪
+HOST-SUFFIX,s.youtube.com,广告
+# → 作用：收集点击与观看记录，用于个性化广告与推荐
+
+# 🧩 广告曝光统计
+HOST-SUFFIX,stats.tube.youtube.com,广告
+# → 作用：广告曝光与点击回传数据阻断
+
+# 🖼️ 广告缩略图与素材
+HOST-SUFFIX,i.ytimg.com,广告
+# → 作用：部分广告缩略图与促销横幅资源加载点
+
+# 🎬 视频广告片段CDN（谨慎启用）
+# HOST-REGEX,^r[0-9]+(-+)?\.googlevideo\.com$,广告视频片段
+# → 作用：广告片段服务器；屏蔽可去广告，但可能影响播放（⚠️慎用）
+
+# 🔍 Google 用户兴趣与画像接口
+HOST-SUFFIX,pagead.google.com,广告
+# → 作用：广告兴趣标签与点击跳转管理接口
+
+# 🧠 YouTube 行为分析系统
+HOST-SUFFIX,analytics.youtube.com,广告
+# → 作用：用户停留时间、互动分析上报
+
+# 🪪 登录身份与广告个性验证
+HOST-SUFFIX,client-channel.google.com,广告
+# → 作用：跨服务广告识别接口，避免身份跟踪
+
+# 🧭 移动端广告推荐API
+HOST-SUFFIX,m.youtube.com/api/stats/ads,广告
+# → 作用：屏蔽移动端插播广告统计调用
+
+# 🌐 广告缩略图CDN
+HOST-SUFFIX,yt3.googleusercontent.com,广告
+# → 作用：加载推广头像与广告缩略图（不影响主视频）
+
+# ================================
+# 🔹 第三部分：隐私分析 / 追踪系统（扩展保护）
+# ================================
+# Google 分析与跟踪系统
+HOST-SUFFIX,google-analytics.com,广告
+HOST-SUFFIX,analytics.google.com,广告
+HOST-SUFFIX,ssl.google-analytics.com,广告
+HOST-SUFFIX,tagmanager.google.com,广告
+HOST-SUFFIX,googletagservices.com,广告
+HOST-SUFFIX,googletagmanager.com,广告
+HOST-SUFFIX,metrics.youtube.com,广告
+HOST-SUFFIX,ytimg.l.google.com,广告
+HOST-SUFFIX,ytstatic.l.google.com,广告
+
+# ================================
+# 🔹 第四部分：建议策略组绑定
+# ================================
+# 建议在 Quantumult X 中创建策略组：
+# [policy]
+# Advertising_Block = reject, direct
+#广告
+# 然后在 [filter_local] 中统一绑定规则：
+# FINAL,Advertising_Block
