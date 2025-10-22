@@ -105,39 +105,39 @@ DOMAIN,track.tenjin.com, Privacy
 DOMAIN,track.tenjin.io, Privacy
 
 # Google / YouTube 隐私追踪
-HOST-SUFFIX,google-analytics.com, Privacy
-HOST-SUFFIX,ssl.google-analytics.com, Privacy
-HOST-SUFFIX,analytics.google.com, Privacy
-HOST-SUFFIX,analytics.youtube.com, Privacy
-HOST-SUFFIX,tagmanager.google.com, Privacy
-HOST-SUFFIX,googletagmanager.com, Privacy
-HOST-SUFFIX,googletagservices.com, Privacy
-HOST-SUFFIX,yt3.ggpht.com, Privacy
-HOST-SUFFIX,yt3.googleusercontent.com, Privacy
-HOST-SUFFIX,ytimg.l.google.com, Privacy
-HOST-SUFFIX,ytstatic.l.google.com, Privacy
-HOST-SUFFIX,metrics.youtube.com, Privacy
-HOST-SUFFIX,client-channel.google.com, Privacy
-HOST-SUFFIX,admob.googleapis.com, Privacy
+HOST-SUFFIX,google-analytics.com,Privacy
+HOST-SUFFIX,ssl.google-analytics.com,Privacy
+HOST-SUFFIX,analytics.google.com,Privacy
+HOST-SUFFIX,analytics.youtube.com,Privacy
+HOST-SUFFIX,tagmanager.google.com,Privacy
+HOST-SUFFIX,googletagmanager.com,Privacy
+HOST-SUFFIX,googletagservices.com,Privacy
+HOST-SUFFIX,yt3.ggpht.com,Privacy
+HOST-SUFFIX,yt3.googleusercontent.com,Privacy
+HOST-SUFFIX,ytimg.l.google.com,Privacy
+HOST-SUFFIX,ytstatic.l.google.com,Privacy
+HOST-SUFFIX,metrics.youtube.com,Privacy
+HOST-SUFFIX,client-channel.google.com,Privacy
+HOST-SUFFIX,admob.googleapis.com,Privacy
 
 # 通用应用/网站分析 eneral App/Web Analytics
 
-DOMAIN-SUFFIX,amplitude.com, Privacy
-DOMAIN-SUFFIX,app-measurement.com, Privacy
-DOMAIN-SUFFIX,appboy.com, Privacy
-DOMAIN-SUFFIX,appsflyer.com, Privacy
-DOMAIN-SUFFIX,branch.io, Privacy
-DOMAIN-SUFFIX,bugsnag.com, Privacy
-DOMAIN-SUFFIX,clarity.ms, Privacy
-DOMAIN-SUFFIX,crashlytics.com, rivacy
-DOMAIN-SUFFIX,data.flurry.com, Privacy
-DOMAIN-SUFFIX,firebase-settings.crashlytics.com, Privacy
-DOMAIN-SUFFIX,firebaseinstallations.googleapis.com, Privacy
-DOMAIN-SUFFIX,firebaseremoteconfig.googleapis.com, Privacy
-DOMAIN-SUFFIX,matomo.org, Privacy
-DOMAIN-SUFFIX,mixpanel.com, Privacy
-DOMAIN-SUFFIX,sentry.io, Privacy
-DOMAIN-SUFFIX,singular.net, Privacy
-DOMAIN-SUFFIX,stats.g.doubleclick.net, Privacy
-DOMAIN-SUFFIX,analytics.google.com, Privacy
-DOMAIN-SUFFIX,www.google-analytics.com, Privacy
+DOMAIN-SUFFIX,amplitude.com,Privacy
+DOMAIN-SUFFIX,app-measurement.com,Privacy
+DOMAIN-SUFFIX,appboy.com,Privacy
+DOMAIN-SUFFIX,appsflyer.com,Privacy
+DOMAIN-SUFFIX,branch.io,Privacy
+DOMAIN-SUFFIX,bugsnag.com,Privacy
+DOMAIN-SUFFIX,clarity.ms,Privacy
+DOMAIN-SUFFIX,crashlytics.com,Privacy
+DOMAIN-SUFFIX,data.flurry.com,Privacy
+DOMAIN-SUFFIX,firebase-settings.crashlytics.com,Privacy
+DOMAIN-SUFFIX,firebaseinstallations.googleapis.com,Privacy
+DOMAIN-SUFFIX,firebaseremoteconfig.googleapis.com,Privacy
+DOMAIN-SUFFIX,matomo.org,Privacy
+DOMAIN-SUFFIX,mixpanel.com,Privacy
+DOMAIN-SUFFIX,sentry.io,Privacy
+DOMAIN-SUFFIX,singular.net,Privacy
+DOMAIN-SUFFIX,stats.g.doubleclick.net,Privacy
+DOMAIN-SUFFIX,analytics.google.com,Privacy
+DOMAIN-SUFFIX,www.google-analytics.com,Privacy
