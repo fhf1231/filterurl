@@ -199,7 +199,40 @@ DOMAIN-SUFFIX,stocks-analytics-events.apple.com,Privacy
 DOMAIN,app-analytics-services.com,Privacy
 DOMAIN,amp-api-edge.apps.apple.com,Privacy
 DOMAIN,browser-intake-datadoghq.com,Privacy
+DOMAIN,api.amplitude.com,Privacy
+DOMAIN,api.mixpanel.com,Privacy
+DOMAIN,analytics.itunes.apple.com,Privacy
+DOMAIN,securemetrics.apple.com,Privacy
+DOMAIN,amp-api-edge.apps.apple.com,Privacy
 
+# Apple Crash  诊断信息上传
+DOMAIN,ocsp.apple.com,Privacy
+DOMAIN,ocsp2.apple.com,Privacy
+DOMAIN,gs-loc.apple.com,Privacy
+DOMAIN,gs.apple.com,Privacy
 
+# Apple 广告相关匿名接口 可选
 
+DOMAIN,appleadservices.apple.com,Privacy
+DOMAIN,iad-api.apple.com,Privacy
 
+# Google Analytics SDK
+
+DOMAIN,app-measurement.com,Privacy
+DOMAIN,app-measurement.com:443,Privacy
+DOMAIN,firebaseinstallations.googleapis.com,Privacy
+DOMAIN,firebaseremoteconfig.googleapis.com,Privacy
+DOMAIN,firebaselogging.googleapis.com,Privacy
+
+# 其他常用 App 行为分析  SDK
+DOMAIN,app-analytics-services.com,Privacy
+DOMAIN,api.segment.io,Privacy
+DOMAIN,api.amplitude.com,Privacy
+DOMAIN,events.mixpanel.com,Privacy
+DOMAIN,analytics.tiktok.com,Privacy
+DOMAIN,analytics.twitter.com,Privacy
+DOMAIN,stats.g.doubleclick.net,Privacy
+DOMAIN,stats.tiktokv.com,Privacy
+DOMAIN,ads-api.tiktokv.com,Privacy
+DOMAIN,tracking.miui.com,Privacy
+DOMAIN,data.mistat.xiaomi.com,Privacy
