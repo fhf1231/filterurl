@@ -219,7 +219,7 @@ DOMAIN,iad-api.apple.com,Privacy
 # Google Analytics SDK
 
 DOMAIN,app-measurement.com,Privacy
-DOMAIN,app-measurement.com:443,Privacy
+DOMAIN,app-measurement.com,Privacy
 DOMAIN,firebaseinstallations.googleapis.com,Privacy
 DOMAIN,firebaseremoteconfig.googleapis.com,Privacy
 DOMAIN,firebaselogging.googleapis.com,Privacy
