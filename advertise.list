@@ -48,7 +48,7 @@ HOST-SUFFIX,stats.tube.youtube.com,广告
 # → 作用：广告曝光与点击回传数据阻断
 
 # 🖼️ 广告缩略图与素材
-HOST-SUFFIX,i.ytimg.com,广告
+# HOST-SUFFIX,i.ytimg.com,广告
 # → 作用：部分广告缩略图与促销横幅资源加载点
 
 # 🎬 视频广告片段CDN（谨慎启用）
@@ -98,4 +98,5 @@ HOST-SUFFIX,ytstatic.l.google.com,广告
 #广告
 # 然后在 [filter_local] 中统一绑定规则：
 # FINAL,Advertising_Block
+
 
