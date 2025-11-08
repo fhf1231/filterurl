@@ -1,4 +1,6 @@
-DOMAIN-SUFFIX,adjust.com,Privacy
+# 【已修正】注释掉了导致 Apple 和 YouTube 服务中断的必要域名
+#
+# DOMAIN-SUFFIX,adjust.com,Privacy
 DOMAIN-SUFFIX,airpr.com,Privacy
 DOMAIN-SUFFIX,cr-nielsen.com,Privacy
 DOMAIN-SUFFIX,hotjar.com,Privacy
@@ -61,7 +63,8 @@ DOMAIN,tracklog.58.com,Privacy
 DOMAIN,miav-cse.avlyun.com,Privacy
 DOMAIN,miui-fxcse.avlyun.com,Privacy
 
-DOMAIN,token.safebrowsing.apple,Privacy
+# 【已修正】Apple 安全浏览服务，拦截可能导致 Safari 警告
+# DOMAIN,token.safebrowsing.apple,Privacy
 
 DOMAIN,hm.baidu.com,Privacy
 DOMAIN,hmma.baidu.com,Privacy
@@ -71,8 +74,9 @@ DOMAIN,track.tiara.kakao.com,Privacy
 
 DOMAIN-SUFFIX,googletagmanager.com,Privacy
 DOMAIN-SUFFIX,google-analytics.com,Privacy
-DOMAIN,safebrowsing.googleapis.com,Privacy
-DOMAIN,safebrowsing.googleapis-cn.com,Privacy
+# 【已修正】Google 安全浏览服务，Brave 浏览器需要
+# DOMAIN,safebrowsing.googleapis.com,Privacy
+# DOMAIN,safebrowsing.googleapis-cn.com,Privacy
 
 DOMAIN-SUFFIX,gozendata.com,Privacy
 DOMAIN-SUFFIX,gzads.com,Privacy
@@ -112,12 +116,16 @@ HOST-SUFFIX,analytics.youtube.com,Privacy
 HOST-SUFFIX,tagmanager.google.com,Privacy
 HOST-SUFFIX,googletagmanager.com,Privacy
 HOST-SUFFIX,googletagservices.com,Privacy
-HOST-SUFFIX,yt3.ggpht.com,Privacy
-HOST-SUFFIX,yt3.googleusercontent.com,Privacy
-HOST-SUFFIX,ytimg.l.google.com,Privacy
-HOST-SUFFIX,ytstatic.l.google.com,Privacy
+# 【已修正】YouTube 频道头像和 UI 资源
+# HOST-SUFFIX,yt3.ggpht.com,Privacy
+# HOST-SUFFIX,yt3.googleusercontent.com,Privacy
+# 【已修正】YouTube 视频缩略图
+# HOST-SUFFIX,ytimg.l.google.com,Privacy
+# 【已修正】YouTube 网站核心静态资源 (JS, CSS)，拦截会导致网站无法打开
+# HOST-SUFFIX,ytstatic.l.google.com,Privacy
 HOST-SUFFIX,metrics.youtube.com,Privacy
-HOST-SUFFIX,client-channel.google.com,Privacy
+# 【已修正】Google 客户端同步频道，拦截会导致 YouTube 播放记录丢失
+# HOST-SUFFIX,client-channel.google.com,Privacy
 HOST-SUFFIX,admob.googleapis.com,Privacy
 
 # 通用应用/网站分析 eneral App/Web Analytics
@@ -197,19 +205,24 @@ DOMAIN-SUFFIX,maps-analytics.apple.com,Privacy
 DOMAIN-SUFFIX,news-analytics.apple.com,Privacy
 DOMAIN-SUFFIX,stocks-analytics-events.apple.com,Privacy
 DOMAIN,app-analytics-services.com,Privacy
-DOMAIN,amp-api-edge.apps.apple.com,Privacy
+# 【已修正】Apple 媒体服务 API，App Store 可能需要
+# DOMAIN,amp-api-edge.apps.apple.com,Privacy
 DOMAIN,browser-intake-datadoghq.com,Privacy
 DOMAIN,api.amplitude.com,Privacy
 DOMAIN,api.mixpanel.com,Privacy
 DOMAIN,analytics.itunes.apple.com,Privacy
 DOMAIN,securemetrics.apple.com,Privacy
-DOMAIN,amp-api-edge.apps.apple.com,Privacy
+# 【已修正】Apple 媒体服务 API，App Store 可能需要 (重复)
+# DOMAIN,amp-api-edge.apps.apple.com,Privacy
 
 # Apple Crash  诊断信息上传
-DOMAIN,ocsp.apple.com,Privacy
-DOMAIN,ocsp2.apple.com,Privacy
-DOMAIN,gs-loc.apple.com,Privacy
-DOMAIN,gs.apple.com,Privacy
+# 【已修正】Apple 证书验证，S掉 App Store 的罪魁祸首
+# DOMAIN,ocsp.apple.com,Privacy
+# DOMAIN,ocsp2.apple.com,Privacy
+# 【已修正】Apple 定位服务
+# DOMAIN,gs-loc.apple.com,Privacy
+# 【已修正】Apple 核心服务 (App Store, 软件更新)，S掉 App Store 的罪魁祸首
+# DOMAIN,gs.apple.com,Privacy
 
 # Apple 广告相关匿名接口 可选
 
@@ -219,20 +232,21 @@ DOMAIN,iad-api.apple.com,Privacy
 # Google Analytics SDK
 
 DOMAIN,app-measurement.com,Privacy
-DOMAIN,app-measurement.com,Privacy
-DOMAIN,firebaseinstallations.googleapis.com,Privacy
-DOMAIN,firebaseremoteconfig.googleapis.com,Privacy
+# DOMAIN,app-measurement.com,Privacy # 重复
+# 【已修正】Firebase 服务，部分 App 登录和通知依赖
+# DOMAIN,firebaseinstallations.googleapis.com,Privacy
+# DOMAIN,firebaseremoteconfig.googleapis.com,Privacy
 DOMAIN,firebaselogging.googleapis.com,Privacy
 
 # 其他常用 App 行为分析  SDK
-DOMAIN,app-analytics-services.com,Privacy
+# DOMAIN,app-analytics-services.com,Privacy # 重复
 DOMAIN,api.segment.io,Privacy
-DOMAIN,api.amplitude.com,Privacy
+# DOMAIN,api.amplitude.com,Privacy # 重复
 DOMAIN,events.mixpanel.com,Privacy
 DOMAIN,analytics.tiktok.com,Privacy
 DOMAIN,analytics.twitter.com,Privacy
 DOMAIN,stats.g.doubleclick.net,Privacy
 DOMAIN,stats.tiktokv.com,Privacy
 DOMAIN,ads-api.tiktokv.com,Privacy
-DOMAIN,tracking.miui.com,Privacy
-DOMAIN,data.mistat.xiaomi.com,Privacy
+# DOMAIN,tracking.miui.com,Privacy # 重复
+# DOMAIN,data.mistat.xiaomi.com,Privacy # 重复
