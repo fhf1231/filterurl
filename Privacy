@@ -1,1 +1,216 @@
+# 策略: Privacy (REJECT)
+# 作用: 屏蔽第三方 App 和网站的行为分析与追踪。
+# 备注: 已修正所有已知的 Apple, Google, Meta 功能性问题。
+
+#  通用行为分析平台
+# DOMAIN-SUFFIX,adjust.com,Privacy # 已修正：部分 App 依赖
 DOMAIN-SUFFIX,airpr.com,Privacy
+DOMAIN-SUFFIX,cr-nielsen.com,Privacy
+DOMAIN-SUFFIX,hotjar.com,Privacy
+DOMAIN-SUFFIX,hotjar.io,Privacy
+DOMAIN-SUFFIX,hs-analytics.net,Privacy
+DOMAIN-SUFFIX,kissmetrics.com,Privacy
+DOMAIN-SUFFIX,kochava.com,Privacy
+DOMAIN-SUFFIX,liadm.com,Privacy
+DOMAIN-SUFFIX,marketo.com,Privacy
+DOMAIN-SUFFIX,mobileapptracking.com,Privacy
+DOMAIN-SUFFIX,mparticle.com,Privacy
+DOMAIN-SUFFIX,nexac.com,Privacy
+DOMAIN-SUFFIX,nr-data.net,Privacy
+DOMAIN-SUFFIX,pardot.com,Privacy
+DOMAIN-SUFFIX,parrable.com,Privacy
+DOMAIN-SUFFIX,petametrics.com,Privacy
+DOMAIN-SUFFIX,predic.io,Privacy
+DOMAIN-SUFFIX,quantcount.com,Privacy
+DOMAIN-SUFFIX,quantserve.com,Privacy
+DOMAIN-SUFFIX,rtbasia.com,Privacy
+DOMAIN-SUFFIX,scorecardresearch.com,Privacy
+DOMAIN-SUFFIX,seewhy.com,Privacy
+DOMAIN-SUFFIX,segment.com,Privacy
+DOMAIN-SUFFIX,segment.io,Privacy
+DOMAIN-SUFFIX,segmentify.com,Privacy
+DOMAIN-SUFFIX,sentiance.com,Privacy
+DOMAIN-SUFFIX,serverbid.com,Privacy
+DOMAIN-SUFFIX,sessionm.com,Privacy
+DOMAIN-SUFFIX,smartlook.com,Privacy
+DOMAIN-SUFFIX,socdm.com,Privacy
+DOMAIN-SUFFIX,socialannex.com,Privacy
+DOMAIN-SUFFIX,socialbakers.com,Privacy
+DOMAIN-SUFFIX,sociaplus.com,Privacy
+DOMAIN-SUFFIX,stathat.com,Privacy
+DOMAIN-SUFFIX,stats-locations.com,Privacy
+DOMAIN-SUFFIX,tagcommander.com,Privacy
+DOMAIN-SUFFIX,tailtarget.com,Privacy
+DOMAIN-SUFFIX,tapad.com,Privacy
+DOMAIN-SUFFIX,tapfiliate.com,Privacy
+DOMAIN-SUFFIX,tapinfluence.com,Privacy
+DOMAIN-SUFFIX,tapstream.com,Privacy
+DOMAIN-SUFFIX,tend.io,Privacy
+DOMAIN-SUFFIX,trackingio.com,Privacy
+DOMAIN-SUFFIX,woopra.com,Privacy
+DOMAIN-SUFFIX,wootric.com,Privacy
+DOMAIN-SUFFIX,wowanalytics.co.uk,Privacy
+DOMAIN-SUFFIX,zoomanalytics.co,Privacy
+DOMAIN-SUFFIX,ads.linkedin.com,Privacy
+DOMAIN,analytics.slashdotmedia.com,Privacy
+DOMAIN,zgsdk.zhugeio.com,Privacy
+DOMAIN,js.users.51.la,Privacy
+DOMAIN,mc.51.la,Privacy
+DOMAIN,sdk.51.la,Privacy
+DOMAIN,wc.51.la,Privacy
+DOMAIN,track.58.com,Privacy
+DOMAIN,tracklog.58.com,Privacy
+DOMAIN,miav-cse.avlyun.com,Privacy
+DOMAIN,miui-fxcse.avlyun.com,Privacy
+# DOMAIN,token.safebrowsing.apple,Privacy # 【已修正】Apple 安全浏览
+DOMAIN,hm.baidu.com,Privacy
+DOMAIN,hmma.baidu.com,Privacy
+DOMAIN,track.tiara.daum.net,Privacy
+DOMAIN,track.tiara.kakao.com,Privacy
+DOMAIN-SUFFIX,googletagmanager.com,Privacy
+DOMAIN-SUFFIX,google-analytics.com,Privacy
+# DOMAIN,safebrowsing.googleapis.com,Privacy # 【已修正】Google 安全浏览
+# DOMAIN,safebrowsing.googleapis-cn.com,Privacy # 【已修正】Google 安全浏览
+DOMAIN-SUFFIX,gozendata.com,Privacy
+DOMAIN-SUFFIX,gzads.com,Privacy
+DOMAIN-SUFFIX,gz-data.com,Privacy
+DOMAIN-SUFFIX,giocdn.com,Privacy
+DOMAIN-SUFFIX,growingio.com,Privacy
+DOMAIN-SUFFIX,tracking.miui.com,Privacy
+DOMAIN,api.miwifi.com,Privacy
+DOMAIN,data.mistat.xiaomi.com,Privacy
+DOMAIN,flash.sec.miui.com,Privacy
+DOMAIN,tracking.intl.miui.com,Privacy
+DOMAIN,a0.app.xiaomi.com,Privacy
+DOMAIN,api.installer.xiaomi.com,Privacy
+DOMAIN,c.bing.com,Privacy
+DOMAIN,c.clarity.ms,Privacy
+DOMAIN,o.clarity.ms,Privacy
+DOMAIN,www.clarity.ms,Privacy
+DOMAIN-SUFFIX,cpatrk.net,Privacy
+DOMAIN-SUFFIX,talkingdata.com,Privacy
+DOMAIN-SUFFIX,talkingdata.net,Privacy
+DOMAIN-SUFFIX,udrig.com,Privacy
+DOMAIN,safebrowsing.urlsec.qq.com,Privacy
+DOMAIN,track.tenjin.com,Privacy
+DOMAIN,track.tenjin.io,Privacy
+
+# Google / YouTube 隐私追踪 (功能修正)
+HOST-SUFFIX,google-analytics.com,Privacy
+HOST-SUFFIX,ssl.google-analytics.com,Privacy
+HOST-SUFFIX,analytics.google.com,Privacy
+# HOST-SUFFIX,analytics.youtube.com,Privacy # 【Gemini 修正】拦截会导致 YouTube 播放记录丢失
+HOST-SUFFIX,tagmanager.google.com,Privacy
+HOST-SUFFIX,googletagmanager.com,Privacy
+HOST-SUFFIX,googletagservices.com,Privacy
+# HOST-SUFFIX,yt3.ggpht.com,Privacy # 【已修正】YouTube 频道头像
+# HOST-SUFFIX,yt3.googleusercontent.com,Privacy # 【已修正】YouTube 频道头像 (已移至广告列表)
+# HOST-SUFFIX,ytimg.l.google.com,Privacy # 【已修正】YouTube 视频缩略图
+# HOST-SUFFIX,ytstatic.l.google.com,Privacy # 【已修正】YouTube 网站核心资源
+# HOST-SUFFIX,metrics.youtube.com,Privacy # 【Gemini 修正】拦截会导致 Apple TV 无法打开 App Store
+# HOST-SUFFIX,client-channel.google.com,Privacy # 【已修正】Google 客户端同步频道
+HOST-SUFFIX,admob.googleapis.com,Privacy
+
+# 通用应用/网站分析 (功能修正)
+DOMAIN-SUFFIX,amplitude.com,Privacy
+DOMAIN-SUFFIX,app-measurement.com,Privacy
+DOMAIN-SUFFIX,appboy.com,Privacy
+DOMAIN-SUFFIX,appsflyer.com,Privacy
+DOMAIN-SUFFIX,branch.io,Privacy
+DOMAIN-SUFFIX,bugsnag.com,Privacy
+DOMAIN-SUFFIX,clarity.ms,Privacy
+DOMAIN-SUFFIX,crashlytics.com,Privacy
+DOMAIN-SUFFIX,data.flurry.com,Privacy
+DOMAIN-SUFFIX,firebase-settings.crashlytics.com,Privacy
+# DOMAIN-SUFFIX,firebaseinstallations.googleapis.com,Privacy # 【已修正】部分 App 登录/通知依赖
+# DOMAIN-SUFFIX,firebaseremoteconfig.googleapis.com,Privacy # 【已修正】部分 App 登录/通知依赖
+DOMAIN-SUFFIX,matomo.org,Privacy
+DOMAIN-SUFFIX,mixpanel.com,Privacy
+DOMAIN-SUFFIX,sentry.io,Privacy
+DOMAIN-SUFFIX,singular.net,Privacy
+DOMAIN-SUFFIX,stats.g.doubleclick.net,Privacy
+DOMAIN-SUFFIX,analytics.google.com,Privacy
+DOMAIN-SUFFIX,www.google-analytics.com,Privacy
+
+# 微软遥测
+DOMAIN-SUFFIX,telemetry.microsoft.com,Privacy
+DOMAIN-SUFFIX,vortex.data.microsoft.com,Privacy
+DOMAIN-SUFFIX,v10.vortex-win.data.microsoft.com,Privacy
+DOMAIN-SUFFIX,settings-win.data.microsoft.com,Privacy
+DOMAIN-SUFFIX,watson.telemetry.microsoft.com,Privacy
+DOMAIN-SUFFIX,telecommand.telemetry.microsoft.com,Privacy
+DOMAIN-SUFFIX,officeclient.microsoft.com,Privacy
+DOMAIN-SUFFIX,nexus.officeapps.live.com,Privacy
+DOMAIN-SUFFIX,ecs.office.com,Privacy
+DOMAIN-SUFFIX,browser.events.data.msn.com,Privacy
+DOMAIN-SUFFIX,edge.activity.windows.com,Privacy
+DOMAIN-SUFFIX,skype.data.microsoft.com,Privacy
+DOMAIN-SUFFIX,teams.events.data.microsoft.com,Privacy
+
+# Meta Facebook Instagram WhatsApp 跟踪 (功能修正)
+# 【Gemini 修正】已禁用主域名和 CDN 域名，防止 App 无法使用或无法加载图片/视频
+# DOMAIN-SUFFIX,facebook.com,Privacy
+# DOMAIN-SUFFIX,fb.com,Privacy
+# DOMAIN-SUFFIX,fb.me,Privacy
+# DOMAIN-SUFFIX,fbcdn.net,Privacy
+DOMAIN-SUFFIX,graph.facebook.com,Privacy
+DOMAIN-SUFFIX,connect.facebook.net,Privacy
+# DOMAIN-SUFFIX,m.facebook.com,Privacy
+# DOMAIN-SUFFIX,www.facebook.com,Privacy
+# DOMAIN-SUFFIX,instagram.com,Privacy
+DOMAIN-SUFFIX,graph.instagram.com,Privacy
+# DOMAIN-SUFFIX,i.instagram.com,Privacy
+# DOMAIN-SUFFIX,whatsapp.com,Privacy
+# DOMAIN-SUFFIX,whatsapp.net,Privacy
+# DOMAIN-SUFFIX,g.whatsapp.net,Privacy
+# DOMAIN-SUFFIX,fbsbx.com,Privacy
+DOMAIN-SUFFIX,atdmt.com,Privacy
+DOMAIN-SUFFIX,fbaddins.com,Privacy
+DOMAIN-SUFFIX,fbadvertising.com,Privacy
+
+# 苹果遥测与跟踪 (功能修正)
+DOMAIN-SUFFIX,ad.apple.com,Privacy
+DOMAIN-SUFFIX,iadsdk.apple.com,Privacy
+DOMAIN-SUFFIX,ads.apple.com,Privacy
+DOMAIN-SUFFIX,analytics.apple.com,Privacy
+DOMAIN-SUFFIX,metrics.apple.com,Privacy
+DOMAIN-SUFFIX,apple-analytics.query.g.aaplimg.com,Privacy
+DOMAIN-SUFFIX,config.analytics.apple.com,Privacy
+DOMAIN-SUFFIX,data-analytics.apple.com,Privacy
+DOMAIN-SUFFIX,reports.apple.com,Privacy
+DOMAIN-SUFFIX,telemetry.apple.com,Privacy
+DOMAIN-SUFFIX,guzzoni.apple.com,Privacy
+DOMAIN-SUFFIX,siri-analytics.apple.com,Privacy
+DOMAIN-SUFFIX,vcs.siri.apple.com,Privacy
+DOMAIN-SUFFIX,weather-analytics.apple.com,Privacy
+DOMAIN-SUFFIX,maps-analytics.apple.com,Privacy
+DOMAIN-SUFFIX,news-analytics.apple.com,Privacy
+DOMAIN-SUFFIX,stocks-analytics-events.apple.com,Privacy
+DOMAIN,app-analytics-services.com,Privacy
+# DOMAIN,amp-api-edge.apps.apple.com,Privacy # 【已修正】App Store 依赖
+DOMAIN,browser-intake-datadoghq.com,Privacy
+DOMAIN,api.amplitude.com,Privacy
+DOMAIN,api.mixpanel.com,Privacy
+DOMAIN,analytics.itunes.apple.com,Privacy
+DOMAIN,securemetrics.apple.com,Privacy
+# DOMAIN,ocsp.apple.com,Privacy # 【已修正】Apple 证书验证 (S掉 App Store 的罪魁祸首)
+# DOMAIN,ocsp2.apple.com,Privacy # 【已修正】Apple 证书验证
+# DOMAIN,gs-loc.apple.com,Privacy # 【已修正】Apple 定位服务
+# DOMAIN,gs.apple.com,Privacy # 【已修正】Apple 核心服务 (App Store, 软件更新)
+DOMAIN,appleadservices.apple.com,Privacy
+DOMAIN,iad-api.apple.com,Privacy
+
+# Google Analytics SDK (功能修正)
+DOMAIN,app-measurement.com,Privacy
+# DOMAIN,firebaseinstallations.googleapis.com,Privacy # 【已修正】Firebase 服务
+# DOMAIN,firebaseremoteconfig.googleapis.com,Privacy # 【已修正】Firebase 服务
+DOMAIN,firebaselogging.googleapis.com,Privacy
+
+# 其他常用 App 行为分析 SDK
+DOMAIN,api.segment.io,Privacy
+DOMAIN,events.mixpanel.com,Privacy
+DOMAIN,analytics.tiktok.com,Privacy
+DOMAIN,analytics.twitter.com,Privacy
+DOMAIN,stats.g.doubleclick.net,Privacy
+DOMAIN,stats.tiktokv.com,Privacy
+DOMAIN,ads-api.tiktokv.com,Privacy
