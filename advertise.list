@@ -64,7 +64,7 @@ HOST-SUFFIX,pagead.google.com,广告
 # → 作用：用户停留时间、互动分析上报
 
 # 🧭 移动端广告推荐API
-HOST-SUFFIX,m.youtube.com,广告
+# HOST-SUFFIX,m.youtube.com,广告 <-- 已禁用，见下方修复区
 # → 作用：屏蔽移动端插播广告统计调用
 
 # 🌐 广告缩略图CDN
@@ -85,6 +85,9 @@ HOST-SUFFIX,googletagmanager.com,广告
 # ================================
 # ⚠️【功能修复区】以下规则导致功能异常，已禁用
 # ================================
+#
+# [禁用] 解决 Brave 无法打开 YouTube 网站 (拦截了网站本身)
+# HOST-SUFFIX,m.youtube.com,广告
 #
 # [禁用] 解决 YouTube App 没有播放记录
 # HOST-SUFFIX,s.youtube.com,广告
