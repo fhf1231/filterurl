@@ -28,19 +28,19 @@ HOST-SUFFIX,adclick.g.doubleclick.net,广告
 HOST-SUFFIX,cm.g.doubleclick.net,广告
 HOST-SUFFIX,yt3.ggpht.com,广告
 HOST-SUFFIX,youtube.googleapis.com,广告
-HOST-SUFFIX,video-stats.youtube.com,广告
+# HOST-SUFFIX,video-stats.youtube.com,广告  <-- 已禁用，见下方修复区
 HOST-SUFFIX,ade.googlesyndication.com,广告
 HOST-SUFFIX,googlesyndication.com,广告
 HOST-SUFFIX,adservices.google.com,广告
 HOST-SUFFIX,adwords.google.com,广告
-HOST-SUFFIX,googleadservices.com,广告 
+HOST-SUFFIX,googleadservices.com,广告 
 
 # 🎯 YouTube 广告与视频流接口
 HOST-SUFFIX,youtubei.googleapis.com,广告
 # → 作用：视频广告控制API，屏蔽前贴片、插播广告配置请求
 
 # 📊 推荐算法与行为追踪
-HOST-SUFFIX,s.youtube.com,广告
+# HOST-SUFFIX,s.youtube.com,广告 <-- 已禁用，见下方修复区
 # → 作用：收集点击与观看记录，用于个性化广告与推荐
 
 # 🧩 广告曝光统计
@@ -60,10 +60,8 @@ HOST-SUFFIX,pagead.google.com,广告
 # → 作用：广告兴趣标签与点击跳转管理接口
 
 # 🧠 YouTube 行为分析系统
-HOST-SUFFIX,analytics.youtube.com,广告
+# HOST-SUFFIX,analytics.youtube.com,广告 <-- 已禁用，见下方修复区
 # → 作用：用户停留时间、互动分析上报
-
-
 
 # 🧭 移动端广告推荐API
 HOST-SUFFIX,m.youtube.com,广告
@@ -83,10 +81,26 @@ HOST-SUFFIX,ssl.google-analytics.com,广告
 HOST-SUFFIX,tagmanager.google.com,广告
 HOST-SUFFIX,googletagservices.com,广告
 HOST-SUFFIX,googletagmanager.com,广告
-HOST-SUFFIX,metrics.youtube.com,广告
-HOST-SUFFIX,ytimg.l.google.com,广告
-HOST-SUFFIX,ytstatic.l.google.com,广告
 
+# ================================
+# ⚠️【功能修复区】以下规则导致功能异常，已禁用
+# ================================
+#
+# [禁用] 解决 YouTube App 没有播放记录
+# HOST-SUFFIX,s.youtube.com,广告
+# HOST-SUFFIX,analytics.youtube.com,广告
+# HOST-SUFFIX,video-stats.youtube.com,广告
+#
+# [禁用] 解决 Brave 无法打开 YouTube 网站 (CSS/JS 加载)
+# HOST-SUFFIX,ytstatic.l.google.com,广告
+#
+# [禁用] 解决 YouTube 网站缩略图无法加载
+# HOST-SUFFIX,ytimg.l.google.com,广告
+#
+# [禁用] 解决 Apple TV 无法打开 App Store
+# HOST-SUFFIX,metrics.youtube.com,广告
+# ================================
+# 
 HOST-SUFFIX,googleadservices.com,广告
 HOST-SUFFIX,google-analytics.com,广告
 HOST-SUFFIX,ssl.google-analytics.com,广告
@@ -96,6 +110,3 @@ HOST-SUFFIX,admob.googleapis.com,广告
 # 🪪 登录身份与广告个性验证
 HOST-SUFFIX,client-channel.google.com,广告
 # → 作用：跨服务广告识别接口，避免身份跟踪
-
-
-
