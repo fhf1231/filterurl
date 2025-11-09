@@ -1,115 +1,18 @@
-HOST-SUFFIX,ad.doubleclick.net,广告
-HOST-SUFFIX,googleads.g.doubleclick.net,广告
-HOST-SUFFIX,pagead.l.doubleclick.net,广告
-HOST-SUFFIX,pubads.g.doubleclick.net,广告
-HOST-SUFFIX,video-ad.googlesyndication.com,广告
-HOST-SUFFIX,pagead2.googlesyndication.com,广告
-HOST-SUFFIX,tpc.googlesyndication.com,广告
-HOST-SUFFIX,googleads4.g.doubleclick.net,广告
-HOST-SUFFIX,static.doubleclick.net,广告
-HOST-SUFFIX,www.googleadservices.com,广告
-HOST-SUFFIX,securepubads.g.doubleclick.net,广告
-HOST-SUFFIX,adservice.google.com,广告
-HOST-SUFFIX,adservice.google.co.in,广告
-HOST-SUFFIX,adservice.google.co.uk,广告
-HOST-SUFFIX,adservice.google.com.au,广告
-HOST-SUFFIX,adservice.google.de,广告
-HOST-SUFFIX,partner.googleadservices.com,广告
-HOST-SUFFIX,ads.youtube.com,广告
-HOST-SUFFIX,ads.google.com,广告
-HOST-SUFFIX,ads-api.tiktokv.com,广告
-HOST-SUFFIX,adserver.google.com,广告
-HOST-SUFFIX,admob.googleapis.com,广告
-HOST-SUFFIX,ads.yieldmanager.com,广告
-HOST-SUFFIX,optimized-by.rubiconproject.com,广告
-HOST-SUFFIX,ads.pubmatic.com,广告
-HOST-SUFFIX,adserver.pubmatic.com,广告
-HOST-SUFFIX,adclick.g.doubleclick.net,广告
-HOST-SUFFIX,cm.g.doubleclick.net,广告
-HOST-SUFFIX,yt3.ggpht.com,广告
-HOST-SUFFIX,youtube.googleapis.com,广告
-# HOST-SUFFIX,video-stats.youtube.com,广告  <-- 已禁用，见下方修复区
-HOST-SUFFIX,ade.googlesyndication.com,广告
+# Google Ads DoubleClick 广告系统
+HOST-SUFFIX,doubleclick.net,广告
 HOST-SUFFIX,googlesyndication.com,广告
-HOST-SUFFIX,adservices.google.com,广告
-HOST-SUFFIX,adwords.google.com,广告
-HOST-SUFFIX,googleadservices.com,广告 
+HOST-SUFFIX,googleadservices.com,广告
+HOST-SUFFIX,adservice.google.com,广告
+HOST-SUFFIX,partner.googleadservices.com,广告
+HOST-SUFFIX,admob.googleapis.com,广告
 
-# 🎯 YouTube 广告与视频流接口
+# YouTube 广告控制
 HOST-SUFFIX,youtubei.googleapis.com,广告
-# → 作用：视频广告控制API，屏蔽前贴片、插播广告配置请求
-
-# 📊 推荐算法与行为追踪
-# HOST-SUFFIX,s.youtube.com,广告 <-- 已禁用，见下方修复区
-# → 作用：收集点击与观看记录，用于个性化广告与推荐
-
-# 🧩 广告曝光统计
 HOST-SUFFIX,stats.tube.youtube.com,广告
-# → 作用：广告曝光与点击回传数据阻断
-
-# 🖼️ 广告缩略图与素材
-# HOST-SUFFIX,i.ytimg.com,广告
-# → 作用：部分广告缩略图与促销横幅资源加载点
-
-# 🎬 视频广告片段CDN（谨慎启用）
-# HOST-REGEX,^r[0-9]+(-+)?\.googlevideo\.com$,广告视频片段
-# → 作用：广告片段服务器；屏蔽可去广告，但可能影响播放（⚠️慎用）
-
-# 🔍 Google 用户兴趣与画像接口
-HOST-SUFFIX,pagead.google.com,广告
-# → 作用：广告兴趣标签与点击跳转管理接口
-
-# 🧠 YouTube 行为分析系统
-# HOST-SUFFIX,analytics.youtube.com,广告 <-- 已禁用，见下方修复区
-# → 作用：用户停留时间、互动分析上报
-
-# 🧭 移动端广告推荐API
-# HOST-SUFFIX,m.youtube.com,广告 <-- 已禁用，见下方修复区
-# → 作用：屏蔽移动端插播广告统计调用
-
-# 🌐 广告缩略图CDN
 HOST-SUFFIX,yt3.googleusercontent.com,广告
-# → 作用：加载推广头像与广告缩略图（不影响主视频）
 
-# ================================
-# 🔹 第三部分：隐私分析 / 追踪系统（扩展保护）
-# ================================
-# Google 分析与跟踪系统
+# 隐私追踪与统计
 HOST-SUFFIX,google-analytics.com,广告
 HOST-SUFFIX,analytics.google.com,广告
-HOST-SUFFIX,ssl.google-analytics.com,广告
 HOST-SUFFIX,tagmanager.google.com,广告
-HOST-SUFFIX,googletagservices.com,广告
 HOST-SUFFIX,googletagmanager.com,广告
-
-# ================================
-# ⚠️【功能修复区】以下规则导致功能异常，已禁用
-# ================================
-#
-# [禁用] 解决 Brave 无法打开 YouTube 网站 (拦截了网站本身)
-# HOST-SUFFIX,m.youtube.com,广告
-#
-# [禁用] 解决 YouTube App 没有播放记录
-# HOST-SUFFIX,s.youtube.com,广告
-# HOST-SUFFIX,analytics.youtube.com,广告
-# HOST-SUFFIX,video-stats.youtube.com,广告
-#
-# [禁用] 解决 Brave 无法打开 YouTube 网站 (CSS/JS 加载)
-# HOST-SUFFIX,ytstatic.l.google.com,广告
-#
-# [禁用] 解决 YouTube 网站缩略图无法加载
-# HOST-SUFFIX,ytimg.l.google.com,广告
-#
-# [禁用] 解决 Apple TV 无法打开 App Store
-# HOST-SUFFIX,metrics.youtube.com,广告
-# ================================
-# 
-HOST-SUFFIX,googleadservices.com,广告
-HOST-SUFFIX,google-analytics.com,广告
-HOST-SUFFIX,ssl.google-analytics.com,广告
-HOST-SUFFIX,tagmanager.google.com,广告
-HOST-SUFFIX,admob.googleapis.com,广告
-
-# 🪪 登录身份与广告个性验证
-HOST-SUFFIX,client-channel.google.com,广告
-# → 作用：跨服务广告识别接口，避免身份跟踪
