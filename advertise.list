@@ -1,21 +1,21 @@
 # Google Ads DoubleClick 广告系统
-HOST-SUFFIX,doubleclick.net,广告
-HOST-SUFFIX,googlesyndication.com,广告
-HOST-SUFFIX,googleadservices.com,广告
-HOST-SUFFIX,adservice.google.com,广告
-HOST-SUFFIX,partner.googleadservices.com,广告
-HOST-SUFFIX,admob.googleapis.com,广告
+host-suffix, doubleclick.net, 广告
+host-suffix, googlesyndication.com, 广告
+host-suffix, googleadservices.com, 广告
+host-suffix, adservice.google.com, 广告
+host-suffix, partner.googleadservices.com, 广告
+host-suffix, admob.googleapis.com, 广告
 
 # YouTube 广告控制
-HOST-SUFFIX,youtubei.googleapis.com,广告
-HOST-SUFFIX,stats.tube.youtube.com,广告
-HOST-SUFFIX,yt3.googleusercontent.com,广告
+host-suffix, youtubei.googleapis.com, 广告
+host-suffix, stats.tube.youtube.com, 广告
+host-suffix, yt3.googleusercontent.com, 广告
 
 # 隐私追踪与统计
-HOST-SUFFIX,google-analytics.com,广告
-HOST-SUFFIX,analytics.google.com,广告
-HOST-SUFFIX,tagmanager.google.com,广告
-HOST-SUFFIX,googletagmanager.com,广告
+host-suffix, google-analytics.com, 广告
+host-suffix, analytics.google.com, 广告
+host-suffix, tagmanager.google.com, 广告
+host-suffix, googletagmanager.com, 广告
 
 # ---- 更具体的广告拒绝规则（必须放在 youtube proxy 之前） ----
 host-suffix, ads.youtube.com, 广告
