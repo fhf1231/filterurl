@@ -16,3 +16,26 @@ HOST-SUFFIX,google-analytics.com,广告
 HOST-SUFFIX,analytics.google.com,广告
 HOST-SUFFIX,tagmanager.google.com,广告
 HOST-SUFFIX,googletagmanager.com,广告
+
+# ---- 更具体的广告拒绝规则（必须放在 youtube proxy 之前） ----
+host-suffix, ads.youtube.com, 广告
+host-suffix, doubleclick.net, 广告
+host-suffix, googlesyndication.com, 广告
+host-suffix, googleads.g.doubleclick.net, 广告
+host-suffix, pagead2.googlesyndication.com, 广告
+host-suffix, pubads.g.doubleclick.net, 广告
+host-suffix, adservice.google.com, 广告
+host-suffix, partnerad.l.doubleclick.net, 广告
+host-suffix, s0.2mdn.net, 广告
+host-suffix, stats.g.doubleclick.net, 广告
+host-suffix, video-stats.l.google.com, 广告
+host-suffix, pagead.l.doubleclick.net, 广告
+
+# ---- keyword 拦截（补充） ----
+host-keyword, doubleclick, 广告
+host-keyword, googlesyndication, 广告
+host-keyword, pubads, 广告
+host-keyword, adservice, 广告
+host-keyword, pagead, 广告
+host-keyword, partnerad, 广告
+host-keyword, video-stats, 广告
