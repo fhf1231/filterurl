@@ -4,6 +4,9 @@
 # 说明：仅保留中国大陆常用稳定域名 + 必要规则，无垃圾域名、无随机域名、无海外节点误判。
 # 适用于：直连中国服务 / 加速国内访问 / 防误判外网
 
+
+# 证书验证 (GlobalSign)，加速国内 HTTPS 网站握手
+HOST-SUFFIX, globalsign.com, 大陆服务
 # ===============================
 # 1. 国内大厂（阿里 / 腾讯 / 百度 / 字节）
 # ===============================
@@ -15,6 +18,11 @@ HOST-SUFFIX,tmall.com,大陆服务
 HOST-SUFFIX,1688.com,大陆服务
 HOST-SUFFIX,amap.com,大陆服务
 HOST-SUFFIX,dingtalk.com,大陆服务
+
+# 微信视频号直播专用规则 (防止消耗代理流量)
+HOST-SUFFIX, wxlivecdn.com, 大陆服务
+HOST-SUFFIX, tlivesource.com, 大陆服务
+HOST-SUFFIX, video.qq.com, 大陆服务
 
 HOST-SUFFIX,qq.com,大陆服务
 HOST-SUFFIX,tencent.com,大陆服务
@@ -95,3 +103,4 @@ HOST-SUFFIX,360.cn,大陆服务
 # ===============================
 HOST-SUFFIX,cn,大陆服务
 GEOIP,CN,大陆服务
+
