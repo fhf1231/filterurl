@@ -70,7 +70,6 @@ HOST,api-p.videomarket.jp,Global
 HOST,api.viu.now.com,Global
 HOST,apl-hamivideo.cdn.hinet.net,Global
 HOST,apple-tv-plus-press.apple.com,Global
-HOST,apple.com.akadns.net,Global
 HOST,apple.comscoreresearch.com,Global
 HOST,appleworldwidedeveloper.hb-api.omtrdc.net,Global
 HOST,appleworldwidedeveloper.sc.omtrdc.net,Global
@@ -125,8 +124,6 @@ HOST,cloud-cdn-digitalocean-com.global.ssl.fastly.net,Global
 HOST,cloudsync-prod.s3.amazonaws.com,Global
 HOST,clubhouse.pubnubapi.com,Global
 HOST,community.oneplus.com,Global
-HOST,configuration-lb.ls-apple.com.akadns.net,Global
-HOST,courier-push-apple.com.akadns.net,Global
 HOST,crl.microsoft.com,Global
 HOST,crl.versign.net,Global
 HOST,csis-prod.s3.amazonaws.com,Global
@@ -342,7 +339,6 @@ HOST,psg-int-centralus.cloudapp.net,Global
 HOST,psg-int-eastus.cloudapp.net,Global
 HOST,public-us-pingsx.api.clonoth.com,Global
 HOST,publicca.googleapis.com,Global
-HOST,push-apple.com.akadns.net,Global
 HOST,pvr-hamivideo.cdn.hinet.net,Global
 HOST,qualcomm.sc.omtrdc.net,Global
 HOST,rink.hockeyapp.net,Global
@@ -476,11 +472,8 @@ HOST,time-d-wwv.nist.gov,Global
 HOST,time-e-b.nist.gov,Global
 HOST,time-e-g.nist.gov,Global
 HOST,time-e-wwv.nist.gov,Global
-HOST,time.apple.com,Global
-HOST,time.asia.apple.com,Global
 HOST,time.aws.com,Global
 HOST,time.cloudflare.com,Global
-HOST,time.euro.apple.com,Global
 HOST,time.facebook.com,Global
 HOST,time.google.com,Global
 HOST,time.nist.gov,Global
@@ -2339,7 +2332,6 @@ HOST-SUFFIX,apple.co.mz,Global
 HOST-SUFFIX,apple.co.nz,Global
 HOST-SUFFIX,apple.co.th,Global
 HOST-SUFFIX,apple.co.uk,Global
-HOST-SUFFIX,apple.com,Global
 HOST-SUFFIX,apple.com.af,Global
 HOST-SUFFIX,apple.com.au,Global
 HOST-SUFFIX,apple.com.bo,Global
