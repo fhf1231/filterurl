@@ -5,10 +5,11 @@
 # HOST-KEYWORD: 1
 # HOST-SUFFIX: 26
 # IP-CIDR: 6
-# TOTAL: 33
-HOST, grok.x.ai,Twitter
-HOST-SUFFIX, x.ai,Twitter
-HOST-SUFFIX, upload.twitter.com,Twitter
+# TOTAL: 37
+HOST,grok.x.ai,Twitter
+HOST-SUFFIX,x.ai,Twitter
+HOST-SUFFIX,api.twitter.com,Twitter
+HOST-SUFFIX,upload.twitter.com,Twitter
 HOST-SUFFIX,ads-twitter.com,Twitter
 HOST-SUFFIX,cms-twdigitalassets.com,Twitter
 HOST-SUFFIX,grok.com,Twitter
