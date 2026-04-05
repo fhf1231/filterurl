@@ -1,45 +1,55 @@
 # NAME: OpenAI
-# AUTHOR: blackmatrix7
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-06-06 09:20:00
+# AUTHOR: fhf1231 (based on blackmatrix7, cleaned & optimized)
+# UPDATED: 2026-04-05
+# DESCRIPTION: OpenAI / ChatGPT 专用分流规则
+# 已清理: IP-CIDR/IP-ASN (触发DNS泄露), 通用第三方服务误杀
 # HOST: 7
-# HOST-KEYWORD: 1
-# HOST-SUFFIX: 24
-# IP-ASN: 1
-# IP-CIDR: 2
-# TOTAL: 35
-HOST,browser-intake-datadoghq.com,OpenAI
+# HOST-SUFFIX: 10
+# TOTAL: 17
+
+# === OpenAI 核心域名 ===
+HOST-SUFFIX,openai.com,OpenAI
+HOST-SUFFIX,chatgpt.com,OpenAI
+HOST-SUFFIX,oaiusercontent.com,OpenAI
+HOST-SUFFIX,oaistatic.com,OpenAI
+
+# === OpenAI CDN & API ===
 HOST,chat.openai.com.cdn.cloudflare.net,OpenAI
 HOST,openai-api.arkoselabs.com,OpenAI
 HOST,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,OpenAI
 HOST,openaicomproductionae4b.blob.core.windows.net,OpenAI
 HOST,production-openaicom-storage.azureedge.net,OpenAI
 HOST,static.cloudflareinsights.com,OpenAI
-HOST-SUFFIX,ai.com,OpenAI
-HOST-SUFFIX,algolia.net,OpenAI
-HOST-SUFFIX,api.statsig.com,OpenAI
-HOST-SUFFIX,auth0.com,OpenAI
-HOST-SUFFIX,chatgpt.com,OpenAI
+
+# === OpenAI 实时通话 (LiveKit) ===
 HOST-SUFFIX,chatgpt.livekit.cloud,OpenAI
-HOST-SUFFIX,client-api.arkoselabs.com,OpenAI
-HOST-SUFFIX,events.statsigapi.net,OpenAI
-HOST-SUFFIX,featuregates.org,OpenAI
 HOST-SUFFIX,host.livekit.cloud,OpenAI
-HOST-SUFFIX,identrust.com,OpenAI
-HOST-SUFFIX,intercom.io,OpenAI
-HOST-SUFFIX,intercomcdn.com,OpenAI
-HOST-SUFFIX,launchdarkly.com,OpenAI
-HOST-SUFFIX,oaistatic.com,OpenAI
-HOST-SUFFIX,oaiusercontent.com,OpenAI
-HOST-SUFFIX,observeit.net,OpenAI
-HOST-SUFFIX,openai.com,OpenAI
+HOST-SUFFIX,turn.livekit.cloud,OpenAI
+
+# === OpenAI 特有的辅助服务 ===
 HOST-SUFFIX,openaiapi-site.azureedge.net,OpenAI
 HOST-SUFFIX,openaicom.imgix.net,OpenAI
-HOST-SUFFIX,segment.io,OpenAI
-HOST-SUFFIX,sentry.io,OpenAI
-HOST-SUFFIX,stripe.com,OpenAI
-HOST-SUFFIX,turn.livekit.cloud,OpenAI
-HOST-KEYWORD,openai,OpenAI
-IP-CIDR,24.199.123.28/32,OpenAI
-IP-CIDR,64.23.132.171/32,OpenAI
-IP-ASN,20473,OpenAI
+HOST-SUFFIX,featuregates.org,OpenAI
+HOST-SUFFIX,client-api.arkoselabs.com,OpenAI
+
+# ============================================
+# 已移除的规则及原因:
+# ============================================
+# HOST-SUFFIX,ai.com → 已重定向到 chatgpt.com, 冗余
+# HOST-SUFFIX,algolia.net → 通用搜索服务, 大量网站使用
+# HOST-SUFFIX,auth0.com → 通用认证服务, 误杀范围大
+# HOST-SUFFIX,stripe.com → 通用支付平台
+# HOST-SUFFIX,sentry.io → 与 filter_local reject 冲突 + 通用监控
+# HOST-SUFFIX,intercom.io → 通用客服平台
+# HOST-SUFFIX,intercomcdn.com → 同上
+# HOST-SUFFIX,segment.io → 通用数据分析
+# HOST-SUFFIX,identrust.com → 证书颁发机构
+# HOST-SUFFIX,launchdarkly.com → 通用功能开关服务
+# HOST-SUFFIX,observeit.net → 通用安全监控
+# HOST-SUFFIX,api.statsig.com → 通用 A/B 测试
+# HOST-SUFFIX,events.statsigapi.net → 同上
+# HOST-KEYWORD,openai → 匹配范围太广, 可能误杀
+# HOST,browser-intake-datadoghq.com → 通用监控
+# IP-CIDR,24.199.123.28/32 → 触发本地 DNS 解析 → DNS 泄露!
+# IP-CIDR,64.23.132.171/32 → 同上
+# IP-ASN,20473 → 同上, 且 ASN 20473 是 Vultr 整体, 范围太大
