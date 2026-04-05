@@ -1,22 +1,24 @@
 # NAME: Gemini
-# AUTHOR: blackmatrix7
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-06-06 09:20:02
-# HOST: 3
-# HOST-KEYWORD: 3
-# HOST-SUFFIX: 7
-# TOTAL: 13
-HOST,ai.google.dev,Gemini
-HOST,alkalimakersuite-pa.clients6.google.com,Gemini
-HOST,makersuite.google.com,Gemini
-HOST-SUFFIX,googleusercontent.com,Gemini
-HOST-SUFFIX,bard.google.com,Gemini
-HOST-SUFFIX,deepmind.com,Gemini
-HOST-SUFFIX,deepmind.google,Gemini
+# AUTHOR: fhf1231
+# UPDATED: 2026-04-05
+# DESCRIPTION: Google Gemini / AI Studio / Bard / DeepMind 专用分流规则
+# HOST: 5
+# HOST-SUFFIX: 6
+# TOTAL: 11
+
+# === Gemini 核心域名 ===
 HOST-SUFFIX,gemini.google.com,Gemini
-HOST-SUFFIX,generativeai.google,Gemini
-HOST-SUFFIX,proactivebackend-pa.googleapis.com,Gemini
-HOST-SUFFIX,apis.google.com,Gemini
-HOST-KEYWORD,colab,Gemini
-HOST-KEYWORD,developerprofiles,Gemini
-HOST-KEYWORD,generativelanguage,Gemini
+HOST-SUFFIX,aistudio.google.com,Gemini
+HOST-SUFFIX,bard.google.com,Gemini
+HOST-SUFFIX,generativelanguage.googleapis.com,Gemini
+HOST,ai.google.dev,Gemini
+
+# === Gemini API 后端 ===
+HOST,alkalicore-pa.clients6.google.com,Gemini
+HOST,alkalimakersuite-pa.clients6.google.com,Gemini
+HOST,webchannel-alkalimakersuite-pa.clients6.google.com,Gemini
+HOST-SUFFIX,makersuite-pa.googleapis.com,Gemini
+
+# === DeepMind ===
+HOST-SUFFIX,deepmind.com,Gemini
+HOST,deepmind.google,Gemini
