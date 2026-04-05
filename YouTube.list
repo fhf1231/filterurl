@@ -1,25 +1,23 @@
 # NAME: YouTube
-# AUTHOR: blackmatrix7
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-06-06 09:15:10
-# HOST: 3
-# HOST-KEYWORD: 1
+# AUTHOR: fhf1231 (based on blackmatrix7, cleaned & optimized)
+# UPDATED: 2026-04-05
+# DESCRIPTION: YouTube 视频专用分流 (不含 YouTube Music)
+# 已清理: IP-CIDR/IP6-CIDR (触发DNS泄露), YouTubeMusic 重复规则
+# HOST: 2
 # HOST-SUFFIX: 179
 # HOST-WILDCARD: 3
-# IP-CIDR: 2
-# IP6-CIDR: 1
-# USER-AGENT: 7
-# TOTAL: 196
-HOST,music.youtube.com,YouTube
+# HOST-KEYWORD: 1
+# USER-AGENT: 4
+# TOTAL: 189
+
+# === YouTube 核心 (不含 music.youtube.com, 由 YouTubeMusic 处理) ===
 HOST,youtubei.googleapis.com,YouTube
 HOST,yt3.ggpht.com,YouTube
-HOST-SUFFIX,GOOGLEAPIS.COM,YouTube
 HOST-SUFFIX,ggpht.cn,YouTube
 HOST-SUFFIX,ggpht.com,YouTube
 HOST-SUFFIX,googlevideo.com,YouTube
 HOST-SUFFIX,gvt1.com,YouTube
 HOST-SUFFIX,gvt2.com,YouTube
-HOST-SUFFIX,google.com,YouTube
 HOST-SUFFIX,video.google.com,YouTube
 HOST-SUFFIX,wide-youtube.l.google.com,YouTube
 HOST-SUFFIX,withyoutube.com,YouTube
@@ -198,13 +196,20 @@ HOST-WILDCARD,youtube.*,YouTube
 HOST-WILDCARD,youtube.*.*,YouTube
 HOST-WILDCARD,youtube.com.*,YouTube
 HOST-KEYWORD,youtube,YouTube
-USER-AGENT,*YouTubeMusic*,YouTube
-USER-AGENT,*com.google.ios.youtubemusic*,YouTube
+
+# === YouTube App USER-AGENT (不含 YouTubeMusic) ===
 USER-AGENT,*youtube*,YouTube
 USER-AGENT,YouTube*,YouTube
-USER-AGENT,YouTubeMusic*,YouTube
 USER-AGENT,com.google.ios.youtube*,YouTube
-USER-AGENT,com.google.ios.youtubemusic*,YouTube
-IP-CIDR,172.110.32.0/21,YouTube
-IP-CIDR,216.73.80.0/20,YouTube
-IP6-CIDR,2620:120:e000::/40,YouTube
+
+# ============================================
+# 已移除的规则及原因:
+# ============================================
+# HOST,music.youtube.com → 移至 YouTubeMusic.txt 处理
+# USER-AGENT,*YouTubeMusic* → 移至 YouTubeMusic.txt 处理
+# USER-AGENT,*com.google.ios.youtubemusic* → 同上
+# USER-AGENT,YouTubeMusic* → 同上
+# USER-AGENT,com.google.ios.youtubemusic* → 同上
+# IP-CIDR,172.110.32.0/21 → 触发本地 DNS 解析 → DNS 泄露!
+# IP-CIDR,216.73.80.0/20 → 同上
+# IP6-CIDR,2620:120:e000::/40 → 同上
