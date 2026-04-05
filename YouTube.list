@@ -195,21 +195,3 @@ HOST-SUFFIX,ytimg.com,YouTube
 HOST-WILDCARD,youtube.*,YouTube
 HOST-WILDCARD,youtube.*.*,YouTube
 HOST-WILDCARD,youtube.com.*,YouTube
-HOST-KEYWORD,youtube,YouTube
-
-# === YouTube App USER-AGENT (不含 YouTubeMusic) ===
-USER-AGENT,*youtube*,YouTube
-USER-AGENT,YouTube*,YouTube
-USER-AGENT,com.google.ios.youtube*,YouTube
-
-# ============================================
-# 已移除的规则及原因:
-# ============================================
-# HOST,music.youtube.com → 移至 YouTubeMusic.txt 处理
-# USER-AGENT,*YouTubeMusic* → 移至 YouTubeMusic.txt 处理
-# USER-AGENT,*com.google.ios.youtubemusic* → 同上
-# USER-AGENT,YouTubeMusic* → 同上
-# USER-AGENT,com.google.ios.youtubemusic* → 同上
-# IP-CIDR,172.110.32.0/21 → 触发本地 DNS 解析 → DNS 泄露!
-# IP-CIDR,216.73.80.0/20 → 同上
-# IP6-CIDR,2620:120:e000::/40 → 同上
