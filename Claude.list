@@ -1,0 +1,17 @@
+# NAME: Claude
+# AUTHOR: fhf1231
+# UPDATED: 2026-04-05
+# DESCRIPTION: Anthropic / Claude AI 专用分流规则
+# HOST: 1
+# HOST-SUFFIX: 4
+# TOTAL: 5
+
+# === Anthropic / Claude 核心域名 ===
+HOST-SUFFIX,anthropic.com,Claude
+HOST-SUFFIX,claude.ai,Claude
+HOST-SUFFIX,claude.com,Claude
+HOST-SUFFIX,claudeusercontent.com,Claude
+HOST-SUFFIX,claudemcpclient.com,Claude
+
+# === Anthropic CDN ===
+HOST,servd-anthropic-website.b-cdn.net,Claude
