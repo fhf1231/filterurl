@@ -23,6 +23,67 @@ HOST-KEYWORD,shein,Global
 USER-AGENT,SHEIN*,Global
 
 
+# === 补充: AI 服务域名 (upstream 缺失) ===
+HOST-SUFFIX,midjourney.com,Global
+HOST-SUFFIX,replicate.com,Global
+HOST-SUFFIX,replicate.delivery,Global
+HOST-SUFFIX,together.ai,Global
+HOST-SUFFIX,together.xyz,Global
+HOST-SUFFIX,fireworks.ai,Global
+HOST-SUFFIX,runwayml.com,Global
+HOST-SUFFIX,copy.ai,Global
+HOST-SUFFIX,phind.com,Global
+HOST-SUFFIX,kagi.com,Global
+HOST-SUFFIX,aider.chat,Global
+HOST-SUFFIX,notebooklm.google.com,Global
+HOST-SUFFIX,inflection.ai,Global
+HOST-SUFFIX,pi.ai,Global
+HOST-SUFFIX,lmsys.org,Global
+HOST-SUFFIX,chat.lmsys.org,Global
+HOST-SUFFIX,openrouter.ai,Global
+HOST-SUFFIX,anyscale.com,Global
+HOST-SUFFIX,deepseek.com,Global
+HOST-SUFFIX,moonshot.cn,Global
+HOST-SUFFIX,kimi.moonshot.cn,Global
+
+# === 补充: Amazon 选品工具 & CDN (代理获取准确美国站数据) ===
+# Helium 10 (Amazon选品/关键词工具)
+HOST-SUFFIX,helium10.com,Global
+HOST-SUFFIX,h10-app.com,Global
+# Jungle Scout (Amazon选品分析)
+HOST-SUFFIX,junglescout.com,Global
+HOST-SUFFIX,junglescout.cn,Global
+# Keepa (Amazon价格追踪/销量分析)
+HOST-SUFFIX,keepa.com,Global
+# 卖家精灵 SellerSprite
+HOST-SUFFIX,sellersprite.com,Global
+# Sorftime (选品工具)
+HOST-SUFFIX,sorftime.com,Global
+# AMZScout
+HOST-SUFFIX,amzscout.net,Global
+# Viral Launch
+HOST-SUFFIX,viral-launch.com,Global
+# Merchant Words
+HOST-SUFFIX,merchantwords.com,Global
+# CamelCamelCamel (价格追踪)
+HOST-SUFFIX,camelcamelcamel.com,Global
+# Sellics / Perpetua
+HOST-SUFFIX,sellics.com,Global
+HOST-SUFFIX,perpetua.io,Global
+# DataHawk
+HOST-SUFFIX,datahawk.co,Global
+# AMZBase
+HOST-SUFFIX,amzbase.com,Global
+# 1688 图片搜索 (反向查供应商, 需代理时)
+HOST-SUFFIX,aliexpress.com,Global
+# Amazon 关联 CDN (确保页面+图片一致走代理)
+HOST-SUFFIX,ssl-images-amazon.com,Global
+HOST-SUFFIX,media-amazon.com,Global
+HOST-SUFFIX,fls-na.amazon.com,Global
+HOST-SUFFIX,completion.amazon.com,Global
+HOST-SUFFIX,unagi.amazon.com,Global
+HOST-SUFFIX,unagi-na.amazon.com,Global
+
 HOST,1password.drift.click,Global
 HOST,3dns-1.adobe.com,Global
 HOST,3dns-2.adobe.com,Global
