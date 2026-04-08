@@ -1,42 +1,69 @@
 # NAME: Telegram
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2023-10-07 14:20:10
-# HOST-KEYWORD: 1
-# HOST-SUFFIX: 20
-# IP-ASN: 5
-# IP-CIDR: 7
-# IP6-CIDR: 4
-# TOTAL: 37
-HOST-SUFFIX,comments.app,Telegram
-HOST-SUFFIX,contest.com,Telegram
-HOST-SUFFIX,graph.org,Telegram
-HOST-SUFFIX,mbrx.app,Telegram
-HOST-SUFFIX,quiz.directory,Telegram
-HOST-SUFFIX,stel.com,Telegram
+
+# NAME: Telegram
+# AUTHOR: fhf1231 (Integrated with blackmatrix7 standard)
+# UPDATED: 2026-04-08
+# DESCRIPTION: Telegram 全量满血分流模块 (已优化 DC 1-5 & 防 DNS 泄露)
+# 核心架构: HOST 规则优先，IP/ASN 规则默认 # 注释备份以防被 GFW 检测
+
+# === Telegram 核心域名 ===
 HOST-SUFFIX,t.me,Telegram
 HOST-SUFFIX,tdesktop.com,Telegram
 HOST-SUFFIX,telega.one,Telegram
 HOST-SUFFIX,telegra.ph,Telegram
-HOST-SUFFIX,telegram-cdn.org,Telegram
 HOST-SUFFIX,telegram.dog,Telegram
 HOST-SUFFIX,telegram.me,Telegram
 HOST-SUFFIX,telegram.org,Telegram
 HOST-SUFFIX,telegram.space,Telegram
+HOST-SUFFIX,telegram-cdn.org,Telegram
 HOST-SUFFIX,telegramdownload.com,Telegram
 HOST-SUFFIX,telesco.pe,Telegram
 HOST-SUFFIX,tg.dev,Telegram
 HOST-SUFFIX,tx.me,Telegram
 HOST-SUFFIX,usercontent.dev,Telegram
+
+# === 辅助服务与第三方客户端 (含 Nicegram/Swiftgram) ===
+HOST,api.imem.app,Telegram
+HOST,api.swiftgram.app,Telegram
+HOST-SUFFIX,cdn-telegram.org,Telegram
+HOST-SUFFIX,comments.app,Telegram
+HOST-SUFFIX,contest.com,Telegram
+HOST-SUFFIX,graph.org,Telegram
+HOST-SUFFIX,legra.ph,Telegram
+HOST-SUFFIX,mbrx.app,Telegram
+HOST-SUFFIX,nicegram.cloud,Telegram
+HOST-SUFFIX,nicegram.app,Telegram
+HOST-SUFFIX,quiz.directory,Telegram
+HOST-SUFFIX,stel.com,Telegram
 HOST-KEYWORD,nicegram,Telegram
-IP-CIDR,109.239.140.0/24,Telegram
-IP-CIDR,149.154.160.0/20,Telegram
-IP-CIDR,5.28.195.163/32,Telegram
-IP-CIDR,5.28.195.205/32,Telegram
-IP-CIDR,5.28.195.37/32,Telegram
-IP-CIDR,5.28.195.80/32,Telegram
-IP-CIDR,91.108.0.0/16,Telegram
-IP6-CIDR,2001:67c:4e8::/48,Telegram
-IP6-CIDR,2001:b28:f23c::/47,Telegram
-IP6-CIDR,2001:b28:f23f::/48,Telegram
-IP6-CIDR,2a0a:f280::/32,Telegram
+
+# === Telegram 全球数据中心 IP 段 (DC 1-5 备份) ===
+# 建议：默认保持注释以根治 DNS 泄露。若连接困难(一直Connecting)可尝试取消部分注释。
+# --- IPv4 CIDR ---
+# IP-CIDR,5.28.192.0/18,Telegram,no-resolve
+# IP-CIDR,91.108.0.0/16,Telegram,no-resolve
+# IP-CIDR,91.108.4.0/22,Telegram,no-resolve
+# IP-CIDR,91.108.8.0/22,Telegram,no-resolve
+# IP-CIDR,91.108.12.0/22,Telegram,no-resolve
+# IP-CIDR,91.108.16.0/22,Telegram,no-resolve
+# IP-CIDR,91.108.56.0/22,Telegram,no-resolve
+# IP-CIDR,109.239.140.0/24,Telegram,no-resolve
+# IP-CIDR,139.59.210.98/32,Telegram,no-resolve
+# IP-CIDR,149.154.160.0/20,Telegram,no-resolve
+# IP-CIDR,196.55.216.167/32,Telegram,no-resolve
+
+# --- IPv6 CIDR ---
+# IP6-CIDR,2001:67c:4e8::/48,Telegram,no-resolve
+# IP6-CIDR,2001:b28:f23c::/47,Telegram,no-resolve
+# IP6-CIDR,2001:b28:f23d::/48,Telegram,no-resolve
+# IP6-CIDR,2001:b28:f23f::/48,Telegram,no-resolve
+# IP6-CIDR,2a0a:f280::/29,Telegram,no-resolve
+
+# === Telegram 自治系统 (ASN) —— 最终覆盖方案 ===
+# IP-ASN,211157,Telegram,no-resolve
+# IP-ASN,44907,Telegram,no-resolve
+# IP-ASN,59930,Telegram,no-resolve
+# IP-ASN,62014,Telegram,no-resolve
+# IP-ASN,62041,Telegram,no-resolve
