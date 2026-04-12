@@ -3,9 +3,9 @@
 # UPDATED: 2026-04-05
 # DESCRIPTION: Twitter / X / Grok AI 专用分流规则
 # 已清理: IP-CIDR (触发DNS泄露), HOST-KEYWORD (范围太广)
-# HOST: 1
+# HOST: 4
 # HOST-SUFFIX: 26
-# TOTAL: 27
+# TOTAL: 30
 
 # === X / Twitter 核心域名 ===
 HOST-SUFFIX,x.com,x
@@ -17,6 +17,8 @@ HOST-SUFFIX,twimg.org,x
 
 # === Grok AI (X 内置 AI) ===
 HOST,grok.x.ai,x
+HOST,api.x.ai,x
+HOST,console.x.ai,x
 HOST-SUFFIX,x.ai,x
 HOST-SUFFIX,grok.com,x
 
