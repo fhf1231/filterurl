@@ -3,15 +3,18 @@
 # UPDATED: 2026-04-05
 # DESCRIPTION: OpenAI / ChatGPT 专用分流规则
 # 已清理: IP-CIDR/IP-ASN (触发DNS泄露), 通用第三方服务误杀
-# HOST: 7
-# HOST-SUFFIX: 10
-# TOTAL: 17
+# HOST: 8
+# HOST-SUFFIX: 12
+# TOTAL: 20
 
 # === OpenAI 核心域名 ===
 HOST-SUFFIX,openai.com,OpenAI
 HOST-SUFFIX,chatgpt.com,OpenAI
 HOST-SUFFIX,oaiusercontent.com,OpenAI
 HOST-SUFFIX,oaistatic.com,OpenAI
+HOST-SUFFIX,auth0.com,OpenAI
+HOST,ios.chat.openai.com,OpenAI
+HOST,android.chat.openai.com,OpenAI
 
 # === OpenAI CDN & API ===
 HOST,chat.openai.com.cdn.cloudflare.net,OpenAI
@@ -36,7 +39,6 @@ HOST-SUFFIX,client-api.arkoselabs.com,OpenAI
 # ============================================
 # HOST-SUFFIX,ai.com → 已重定向到 chatgpt.com, 冗余
 # HOST-SUFFIX,algolia.net → 通用搜索服务, 大量网站使用
-# HOST-SUFFIX,auth0.com → 通用认证服务, 误杀范围大
 # HOST-SUFFIX,stripe.com → 通用支付平台
 # HOST-SUFFIX,sentry.io → 与 filter_local reject 冲突 + 通用监控
 # HOST-SUFFIX,intercom.io → 通用客服平台
