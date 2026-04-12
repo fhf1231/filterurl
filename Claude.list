@@ -1,17 +1,30 @@
 # NAME: Claude
-# AUTHOR: fhf1231
+# AUTHOR: fhf1231 (based on blackmatrix7, cleaned & optimized)
 # UPDATED: 2026-04-05
 # DESCRIPTION: Anthropic / Claude AI 专用分流规则
-# HOST: 1
-# HOST-SUFFIX: 4
-# TOTAL: 5
+# 已清理: IP-CIDR (触发DNS泄露), HOST-KEYWORD (范围太广)
+# HOST: 4
+# HOST-SUFFIX: 10
+# TOTAL: 14
 
 # === Anthropic / Claude 核心域名 ===
 HOST-SUFFIX,anthropic.com,Claude
 HOST-SUFFIX,claude.ai,Claude
 HOST-SUFFIX,claude.com,Claude
 HOST-SUFFIX,claudeusercontent.com,Claude
+HOST-SUFFIX,anthropicusercontent.com,Claude
+HOST-SUFFIX,useclaude.com,Claude
+HOST-SUFFIX,useclaude.ai,Claude
 HOST-SUFFIX,claudemcpclient.com,Claude
+
+# === API 与开发者平台 ===
+HOST,api.anthropic.com,Claude
+HOST,platform.claude.com,Claude
+HOST,downloads.claude.ai,Claude
+
+# === 遥测与验证 (Anthropic 专属/强相关) ===
+HOST-SUFFIX,statsigapi.net,Claude
+HOST,cdn.usefathom.com,Claude
 
 # === Anthropic CDN ===
 HOST,servd-anthropic-website.b-cdn.net,Claude
