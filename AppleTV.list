@@ -13,15 +13,15 @@ HOST, weather-analytics-events.apple.com, reject
 # 2. 美区流媒体与原生内容 (强制代理，突破锁区)
 # ----------------------------------------
 # 解锁 Apple TV+
-HOST, hls-amt.itunes.apple.com, AppleTV
-HOST, hls.itunes.apple.com, AppleTV
-HOST, np-edge.itunes.apple.com, AppleTV
-HOST, play-edge.itunes.apple.com, AppleTV
-HOST, tv.applemusic.com, AppleTV
-HOST, uts-api.itunes.apple.com, AppleTV
-HOST-SUFFIX, tv.apple.com, AppleTV
-USER-AGENT, AppleTV*, AppleTV
-USER-AGENT, com.apple.tv*, AppleTV
+HOST, hls-amt.itunes.apple.com, Apple
+HOST, hls.itunes.apple.com, Apple
+HOST, np-edge.itunes.apple.com, Apple
+HOST, play-edge.itunes.apple.com, Apple
+HOST, tv.applemusic.com, Apple
+HOST, uts-api.itunes.apple.com, Apple
+HOST-SUFFIX, tv.apple.com, Apple
+USER-AGENT, AppleTV*, Apple
+USER-AGENT, com.apple.tv*, Apple
 
 # 解锁美区 Apple News, Podcasts, Books 商店页面
 HOST-SUFFIX, apple.news, Global
