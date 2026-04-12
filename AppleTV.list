@@ -1,17 +1,106 @@
-# NAME: AppleTV
-# AUTHOR: blackmatrix7
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2023-10-07 14:17:49
-# HOST: 6
-# HOST-SUFFIX: 1
-# USER-AGENT: 2
-# TOTAL: 9
-HOST,hls-amt.itunes.apple.com,AppleTV
-HOST,hls.itunes.apple.com,AppleTV
-HOST,np-edge.itunes.apple.com,AppleTV
-HOST,play-edge.itunes.apple.com,AppleTV
-HOST,tv.applemusic.com,AppleTV
-HOST,uts-api.itunes.apple.com,AppleTV
-HOST-SUFFIX,tv.apple.com,AppleTV
-USER-AGENT,AppleTV*,AppleTV
-USER-AGENT,com.apple.tv*,AppleTV
+# ========================================
+# 🍎 [国行设备 + 美区 ID 专属分流]
+# ========================================
+
+# ----------------------------------------
+# 1. 隐私与遥测屏蔽 (节省 4G 流量)
+# ----------------------------------------
+HOST, books-analytics-events.apple.com, reject
+HOST, stocks-analytics-events.apple.com, reject
+HOST, weather-analytics-events.apple.com, reject
+
+# ----------------------------------------
+# 2. 美区流媒体与原生内容 (强制代理，突破锁区)
+# ----------------------------------------
+# 解锁 Apple TV+
+HOST, hls-amt.itunes.apple.com, AppleTV
+HOST, hls.itunes.apple.com, AppleTV
+HOST, np-edge.itunes.apple.com, AppleTV
+HOST, play-edge.itunes.apple.com, AppleTV
+HOST, tv.applemusic.com, AppleTV
+HOST, uts-api.itunes.apple.com, AppleTV
+HOST-SUFFIX, tv.apple.com, AppleTV
+USER-AGENT, AppleTV*, AppleTV
+USER-AGENT, com.apple.tv*, AppleTV
+
+# 解锁美区 Apple News, Podcasts, Books 商店页面
+HOST-SUFFIX, apple.news, Global
+HOST, news-events.apple.com, Global
+HOST, news-edge.apple.com, Global
+HOST, apple.comscoreresearch.com, Global
+HOST, amp-api.podcasts.apple.com, Global
+HOST, books-edge.apple.com, Global
+
+# ----------------------------------------
+# 3. 美区 App Store 接口 (强制代理，解决转圈)
+# ----------------------------------------
+HOST, client-api.itunes.apple.com, Global
+HOST, play.itunes.apple.com, Global
+HOST-SUFFIX, buy.itunes.apple.com, Global
+HOST, cma2.itunes.apple.com, Global
+HOST, bookkeeper.itunes.apple.com, Global
+HOST, upp.itunes.apple.com, Global
+HOST, bag.itunes.apple.com, Global
+HOST, fpinit.itunes.apple.com, Global
+HOST, sf-api-token-service.itunes.apple.com, Global
+HOST, pd.itunes.apple.com, Global
+HOST, musicstatus.itunes.apple.com, Global
+HOST, itunes.apple.com, Global
+HOST, inappcheck.itunes.apple.com, Global
+HOST, amp-api.apps.apple.com, Global
+HOST, amp-api-search-edge.apps.apple.com, Global
+HOST, amp-api-edge.apps.apple.com, Global
+
+# ----------------------------------------
+# 4. 账号安全与 iCloud 同步 (强制直连，防封号)
+# ----------------------------------------
+HOST, appleid.apple.com, direct
+HOST, gsa.apple.com, direct
+HOST, gsas.apple.com, direct
+HOST-SUFFIX, smp-device.apple.com, direct
+HOST, api.apple-cloudkit.com, direct
+HOST-SUFFIX, icloud.com, direct
+HOST-SUFFIX, icloud-content.com, direct
+
+# ----------------------------------------
+# 5. 国行底层服务与下载加速 (强制直连)
+# ----------------------------------------
+# 系统推送与时间 (防断流)
+HOST-SUFFIX, push.apple.com, direct
+HOST, time.apple.com, direct
+HOST, time.asia.apple.com, direct
+HOST, pancake.apple.com, direct
+HOST, configuration.apple.com, direct
+
+# App 更新包下载 (国内 CDN 满速)
+HOST, cds.apple.com, direct
+HOST-SUFFIX, cdn.apple.com, direct
+HOST-SUFFIX, mzstatic.com, direct
+HOST, mesu.apple.com, direct
+HOST, appldnld.apple.com, direct
+HOST, swdist.apple.com, direct
+HOST, swscan.apple.com, direct
+HOST, ipcdn.apple.com, direct
+
+# ----------------------------------------
+# 6. 国行专属定位与天气保护 (强制直连)
+# ----------------------------------------
+HOST-SUFFIX, ls.apple.com, direct
+HOST-SUFFIX, gs.apple.com, direct
+HOST-SUFFIX, apple-mapkit.com, direct
+HOST, wps.apple.com, direct
+HOST-SUFFIX, maps.apple.com, direct
+HOST, cdn.apple-mapkit.com, direct
+HOST, weatherkit.apple.com, direct
+HOST-SUFFIX, weather-edge.apple.com, direct
+HOST-SUFFIX, weather-data.apple.com, direct
+HOST-SUFFIX, weather-map.apple.com, direct
+HOST-SUFFIX, weather.apple.com, direct
+HOST, weather-map2.apple.com, direct
+
+# ----------------------------------------
+# 7. Apple 兜底规则 (直连)
+# ----------------------------------------
+HOST-SUFFIX, apple.com, direct
+HOST-SUFFIX, apple.cn, direct
+HOST-SUFFIX, apple.com.cn, direct
