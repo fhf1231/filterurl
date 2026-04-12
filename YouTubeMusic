@@ -1,8 +1,12 @@
 # NAME: YouTubeMusic
-# AUTHOR: blackmatrix7
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-06-06 09:15:10
+# AUTHOR: fhf1231 (based on blackmatrix7, cleaned & optimized)
+# UPDATED: 2026-04-05
+# DESCRIPTION: YouTube Music 专用分流规则
 # HOST: 1
-# USER-AGENT: 4
-# TOTAL: 5
+# HOST-SUFFIX: 1
+# TOTAL: 2
+
+# === YouTube Music 核心域名 ===
+# 注意: 必须在 YouTube 规则之前匹配，否则会被 YouTube 规则夺取
 HOST,music.youtube.com,YouTubeMusic
+HOST-SUFFIX,music.youtube.com,YouTubeMusic
