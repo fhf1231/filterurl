@@ -58,7 +58,7 @@ static=AppleTV, atv, rntv, cctv, direct, img-url=https://raw.githubusercontent.c
 
 [server_local]
 # [主力] atv - XTLS Vision，支持 UDP 转发
-vless=a.lyshen.com:443, method=none, password=799b482e-a6ad-4337-aeb3-301dc046f4d0 obfs=over-tls, obfs-host=a.lyshen.com, tls-verification=true, vless-flow=xtls-rprx-vision, fast-open=false, udp-relay=true, tag=atv
+vless=a.lyshen.com:443, method=none, password=799b482e-a6ad-4337-aeb3-301dc046f4d0, obfs=over-tls, obfs-host=a.lyshen.com, tls-verification=true, vless-flow=xtls-rprx-vision, fast-open=false, udp-relay=true, tag=atv
 
 # [备用1] cctv - XTLS Vision，不支持 UDP
 vless=c.lifengchun.top:443, method=none, password=c85a7226-2f5b-4009-b02b-fc8e91e208d3, obfs=over-tls, obfs-host=c.lifengchun.top, tls-verification=true, vless-flow=xtls-rprx-vision, fast-open=false, udp-relay=false, tag=cctv
