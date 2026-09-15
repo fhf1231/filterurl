@@ -113,7 +113,7 @@ host, ip-api.com, Global
 # ===== 3) Apple TV & 美区 Apple 生态（动静分离）=====
 
 # --- 3.1 Apple TV+ / 商店 API 鉴权 → AppleTV(保护美区身份，防白屏锁区) ---
-host-suffix, tv.apple.com, AppleTV
+
 host-suffix, api-tv.apple.com, AppleTV
 host, uts-api.itunes.apple.com, AppleTV
 host, play.itunes.apple.com, AppleTV
@@ -125,6 +125,7 @@ host-suffix, hls.itunes.apple.com, direct
 host-suffix, hls-amt.itunes.apple.com, direct
 host-suffix, hls-svod.itunes.apple.com, direct
 host-keyword, -edge.itunes.apple.com, direct
+host-suffix, tv.apple.com, direct
 
 # --- 3.3 美区 App Store 商店数据 → AppleTV ---
 host, bag.itunes.apple.com, AppleTV
