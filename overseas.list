@@ -1,51 +1,120 @@
-# NAME: Overseas Proxy (v7 cleaned)
-# AUTHOR: fhf1231 (based on blackmatrix7, cleaned & optimized)
-# UPDATED: 2026-08-19  (v7 audit)
+# NAME: Overseas Proxy (v8 — 白名单就绪)
+# UPDATED: 2026-09-18
 #
 # ===========================================================================
-# ⚠️ 重要：本表在当前架构下不参与路由决策，主配置 v7 已将其 enabled=false
+# 本表的定位（v8 起改变）
 # ===========================================================================
-# 原因：本表 26190 条规则策略全部为 Global，且是最后一个 filter_remote，
-# 其后紧接 FINAL,Global。任何走到这里的域名，命中与不命中的结果完全相同。
-# 停用可省下约 880KB 规则在 iOS Network Extension 内的常驻内存与每日更新流量。
+# v7 及之前：黑名单架构（FINAL, Global）下本表不参与决策，全表 enabled=false。
+# v8 起：为「另一台电脑改用 FINAL, direct」准备 —— 那台机器上本表是【唯一代理判据】，
+#        不在本表、不在 filter_local 的域名一律直连。清洗标准因此反转：
+#        · 与策略组冲突的 → 必删（会打穿分组）
+#        · 覆盖不足的     → 宁可多留（多代理只是慢，漏代理是断）
 #
-# 【何时需要启用】若把主配置的 FINAL 改成 direct（切换为白名单架构），
-# 本表就成为唯一的代理判据，此时必须改回 enabled=true —— 本文件因此保留并清洗。
-#
-# ---------------------------------------------------------------------------
-# v7 变更：删除 6 条 GFWList → 规则表转换过程中产生的无效残渣
-# ---------------------------------------------------------------------------
-#   gfwlist.end / gfwlist.start   —— 源文件的 "!--- gfwlist.txt start/end ---" 分隔注释被误解析成域名
-#   googlescholar.comusa          —— 两个域名被拼接，顶级域不存在
-#   if.ttt / intelnet.component / v.roucdn  —— 顶级域不存在，永不可能命中
+# 【两台机器通用】本表在 FINAL,Global 的机器上启用也安全 —— v8 已消除全部冲突，
+#   启用后唯一影响是多占约 880KB 常驻内存。是否启用由各机自行决定。
 #
 # ---------------------------------------------------------------------------
-# ⚠️ 待人工确认：以下条目命中了"公共后缀"(eTLD)，会把该后缀下【全部】注册域名
-#    判为代理。若启用本表，请逐条确认是否符合预期。
+# v8 变更 A：删除与 [filter_local] 策略组冲突的 16 条 —— 必须删
 # ---------------------------------------------------------------------------
-# 【个人 NAS / 家用 DDNS —— 风险最高，会把家里的 NAS 推去海外代理】
-#   synology.me  myqnapcloud.com  diskstation.me  myds.me  i234.me
-#   dsmynas.com/.net/.org   familyds.com/.net/.org   dscloud.biz/.me/.mobi
-#   duckdns.org  no-ip.org  hopto.org  zapto.org  sytes.net  dyndns.org
-#   dynu.net  servehttp.com  homeip.net  gotdns.ch  from-pr.com  from-sd.com
-#   is-a-hunter.com  blogdns.org  dyndns-ip.com  dyndns-pics.com
+# QX 的 kQTXFilterMatchOptimization 按【精度】而非行序裁决，local / remote 不分先后。
 #
-# 【多租户 PaaS / 静态托管 —— 会把该平台上全部站点（含国内开发者的）判为代理】
-#   cloudfront.net  workers.dev  web.app  firebaseapp.com  run.app  appspot.com
-#   cloudfunctions.net  azurewebsites.net  azurecontainer.io  azure-mobile.net
-#   cloudapp.net  elasticbeanstalk.com  herokuapp.com  herokussl.com
-#   netlify.com  bitballoon.com  now.sh  vercel 系  github.io  gitlab.io
-#   readthedocs.io  js.org  trycloudflare.com  carrd.co  yolasite.com
-#   alwaysdata.net  yandexcloud.net  fastlylb.net  fastly-terrarium.com
-#   blogspot.* (73 条)
+# A-1 同类型同域名并列（精度相同，谁赢未经验证 → 必须消除）11 条：
+#   ai.google              本地 → GoogleAI
+#   chat.com               本地 → OpenAI
+#   host.livekit.cloud     本地 → OpenAI
+#   turn.livekit.cloud     本地 → OpenAI
+#   google.com             本地 → Google
+#   googleapis.com         本地 → Google
+#   gstatic.com            本地 → Google
+#   googleusercontent.com  本地 → Google
+#   withgoogle.com         本地 → Google
+#   goo.gl                 本地 → Google
+#   googleadservices.com   本地 → reject   ← 留着会让广告拦截失效
 #
-# 【国家/机构级公共后缀 —— 覆盖面极大】
-#   ac.uk  ac.ir  gov.ir  gov.tw  go.jp  idv.tw  url.tw
-#   com.ru  pp.ru  pp.ua  jp.net  sa.com  ae.org  eu.org
+#   为什么只有 Google 家族出问题：v7 清洗时已按「交给策略组管」删掉了
+#   youtube.com / youtu.be / googlevideo.com / ytimg.com / ggpht.com /
+#   openai.com / chatgpt.com / anthropic.com / claude.ai / x.com / twitter.com，
+#   唯独 Google 核心域名漏删。v8 补齐，口径一致。
 #
-# HOST: 101
-# HOST-SUFFIX: 26089
-# TOTAL: 26190
+# A-2 远程 HOST 精度高于本地 HOST-SUFFIX，必然推翻本地（无悬念）5 条：
+#   developer.apple.com / gspe1-ssl.ls.apple.com / news-edge.apple.com /
+#   news-events.apple.com / sr-edge.siri.apple.com
+#   本地 §7 是 HOST-SUFFIX, apple.com, direct（Apple 全量直连、单一住宅 IP 出口）。
+#   这 5 条 HOST 精度更高，留着就是从设计上把 Apple 出口撕开一道口子。
+#
+# ---------------------------------------------------------------------------
+# v8 变更 B：删除与 mainland.list 直接矛盾的 2 条 —— 必须删
+# ---------------------------------------------------------------------------
+#   sellersprite.com   卖家精灵    mainland.list 判 China(direct)，本表原判 Global
+#   sorftime.com       Sorftime    同上
+#   两者都是跨境电商选品工具，国内节点访问更快，且国内表是权威。
+#   全量域名交集实测只有这 2 条，其余 26000+ 条与国内表零重叠。
+#
+# ---------------------------------------------------------------------------
+# v8 变更 C：家用 DDNS / NAS 后缀 34 条 —— 改为注释保留（见文件末尾）
+# ---------------------------------------------------------------------------
+# 切 FINAL=direct 后，这些后缀会把【家里的群晖 / QNAP / 内网穿透】推去海外节点：
+# 设备在国内、人也在国内，流量却绕地球一圈，纯损失。
+# 但考虑到可能有海外自建服务挂在 duckdns / dynu / no-ip 上，
+# 未物理删除，而是在文件末尾以注释形式完整保留 —— 需要时去掉 # 即可恢复。
+#
+# ---------------------------------------------------------------------------
+# v8 变更 D：删除 v7 漏网的无效残渣 5 条
+# ---------------------------------------------------------------------------
+#   practivate.adobe / .ipp / .newoa / .ntp   Adobe 破解 hosts 屏蔽表残留，顶级域不存在
+#   crl.versign.net                           verisign 拼错漏了 i
+#   与 v7 已删的 gfwlist.end / if.ttt / v.roucdn 同一批，永不命中。
+#
+# ---------------------------------------------------------------------------
+# v8 变更 E：新增 8 条 —— 切 FINAL=direct 后会掉进直连的缺口
+# ---------------------------------------------------------------------------
+# 这些域名在黑名单架构下靠 FINAL→Global 兜底，切白名单后会变成直连而失效：
+#   statsig.com / statsigapi.net / featuregates.org
+#       OpenAI 官方网络清单点名要求放行。原设计刻意不绑进 OpenAI 组
+#       （通用 SaaS，官方只要求「可达」而非「同出口」），靠 FINAL 兜底 —— 兜底没了就得补。
+#   sentry.io                错误上报，OpenAI / Claude 前端都在用
+#   segment.com / segment.io 表中原本只有 cdn.segment.com，api.segment.io 漏了
+#   launchdarkly.com         feature flag，拿不到会导致功能开关异常
+#   okta.com                 企业 SSO 登录入口
+#
+# ⚠️ 纯埋点类【已评估，刻意不收录】，勿重复讨论：
+#   posthog.com / mixpanel.com / bugsnag.com / hotjar.com / optimizely.com / split.io
+#   理由：与功能无关，直连超时等价于拦截；且本配置 §2 对埋点的既定态度是能拦就拦
+#        （已 reject datadoghq / app-measurement / doubleclick / googleadservices）。
+#   若切白名单后发现某站因此卡顿，单独加 filter_local 即可。
+#
+# ===========================================================================
+# ⚠️ 切 FINAL=direct 前必读 —— 白名单架构的三个固有缺口
+# ===========================================================================
+# 1）本表零 IP-CIDR、零 GEOIP。裸 IP 访问墙外服务会直连 → 断。
+#    若有此需求，需在 filter_local 自行补 IP-CIDR 规则。
+# 2）26000+ 条不可能覆盖全部墙外站点。遇到打不开的站：
+#    QX 日志取主机名 → 加一条 HOST-SUFFIX, <域名>, Global 到 filter_local。
+# 3）本表按【公共后缀】大面积覆盖，下列条目会把该后缀下全部注册域名判为代理。
+#    在白名单架构下这是【必需的】（不代理就是断），不要因为「覆盖面太大」而删：
+#      多租户 PaaS：cloudfront.net  workers.dev  web.app  firebaseapp.com  run.app
+#                   appspot.com  cloudfunctions.net  azurewebsites.net  cloudapp.net
+#                   elasticbeanstalk.com  herokuapp.com  netlify.com  now.sh
+#                   github.io  gitlab.io  readthedocs.io  js.org  carrd.co
+#                   trycloudflare.com  alwaysdata.net  yandexcloud.net
+#                   fastlylb.net  blogspot.*（73 条）
+#      国家/机构级：ac.uk  ac.ir  gov.ir  gov.tw  go.jp  idv.tw  url.tw
+#                   com.ru  pp.ru  pp.ua  jp.net  sa.com  ae.org  eu.org
+#    实测这些与 mainland.list 零重叠 —— 在黑名单架构下它们本就走 FINAL→Global，
+#    启用本表不改变任何结果；只有切到白名单才真正生效。
+#
+# ===========================================================================
+# 规则统计
+# ===========================================================================
+# HOST:        91
+# HOST-SUFFIX: 26050
+# TOTAL:       26141
+# 策略:        全部 Global（单一策略，与 [policy] 中的 static=Global 对应）
+#
+# v7 → v8：删 57（冲突 16 + 国内矛盾 2 + DDNS 34 + 残渣 5），增 8
+# ===========================================================================
+
+# === HOST 精确匹配 ===
 
 HOST,1password.drift.click,Global
 HOST,adobeereg.com,Global
@@ -70,12 +139,10 @@ HOST,cdn-spotify-experiments.conductrics.com,Global
 HOST,cdn.js7k.com,Global
 HOST,cisco.evergage.com,Global
 HOST,clubhouse.pubnubapi.com,Global
-HOST,crl.versign.net,Global
 HOST,datarouter.apps.netherrealm.com,Global
 HOST,default.exp-tas.com,Global
 HOST,deribit.cdn.prismic.io,Global
 HOST,deutschewelle.h-cdn.com,Global
-HOST,developer.apple.com,Global
 HOST,dl.begellhouse.com,Global
 HOST,ea.tt.omtrdc.net,Global
 HOST,elib.maruzen.co.jp,Global
@@ -85,7 +152,6 @@ HOST,faronics.kayako.com,Global
 HOST,firstsearch.oclc.org,Global
 HOST,github-api.arkoselabs.com,Global
 HOST,gog.qtlglb.com,Global
-HOST,gspe1-ssl.ls.apple.com,Global
 HOST,holoxx.f5.si,Global
 HOST,hpstore.corpmerchandise.com,Global
 HOST,hub.slarker.me,Global
@@ -98,8 +164,6 @@ HOST,live-patreon-marketing.pantheonsite.io,Global
 HOST,mdn.mozillademos.org,Global
 HOST,medone-education.thieme.com,Global
 HOST,nationalaustraliaban.tt.omtrdc.net,Global
-HOST,news-edge.apple.com,Global
-HOST,news-events.apple.com,Global
 HOST,ntp-c.colorado.edu,Global
 HOST,ntp0.ntp-servers.net,Global
 HOST,ntp1.ntp-servers.net,Global
@@ -111,10 +175,6 @@ HOST,ntp6.ntp-servers.net,Global
 HOST,ntp7.ntp-servers.net,Global
 HOST,nvidia.tt.omtrdc.net,Global
 HOST,ood.opsource.net,Global
-HOST,practivate.adobe,Global
-HOST,practivate.adobe.ipp,Global
-HOST,practivate.adobe.newoa,Global
-HOST,practivate.adobe.ntp,Global
 HOST,public-us-pingsx.api.clonoth.com,Global
 HOST,qualcomm.sc.omtrdc.net,Global
 HOST,rss.4040940.xyz,Global
@@ -133,7 +193,6 @@ HOST,rsshub.rssforever.com,Global
 HOST,rsshub.umzzz.com,Global
 HOST,rsshub.woodland.cafe,Global
 HOST,rsshub2.asailor.org,Global
-HOST,sr-edge.siri.apple.com,Global
 HOST,straitsx-826709081262441084-b790f87a2ae6fd417434295.freshchat.com,Global
 HOST,tesla-cdn.thron.com,Global
 HOST,tmdb-image-prod.b-cdn.net,Global
@@ -1189,7 +1248,6 @@ HOST-SUFFIX,ahxxx.club,Global
 HOST-SUFFIX,ai-kan.net,Global
 HOST-SUFFIX,ai-wen.net,Global
 HOST-SUFFIX,ai.dev,Global
-HOST-SUFFIX,ai.google,Global
 HOST-SUFFIX,ai7995.site,Global
 HOST-SUFFIX,ai91porn.cc,Global
 HOST-SUFFIX,aiasahi.jp,Global
@@ -3603,7 +3661,6 @@ HOST-SUFFIX,blogblog.com,Global
 HOST-SUFFIX,blogcatalog.com,Global
 HOST-SUFFIX,blogcdn.com,Global
 HOST-SUFFIX,blogcity.me,Global
-HOST-SUFFIX,blogdns.org,Global
 HOST-SUFFIX,blogebay.com,Global
 HOST-SUFFIX,blogger.com,Global
 HOST-SUFFIX,bloggrowup.com,Global
@@ -5082,7 +5139,6 @@ HOST-SUFFIX,charlestonroadregistry.com,Global
 HOST-SUFFIX,charlotte-anime.jp,Global
 HOST-SUFFIX,charmescorts.com,Global
 HOST-SUFFIX,charticulator.com,Global
-HOST-SUFFIX,chat.com,Global
 HOST-SUFFIX,chatango.com,Global
 HOST-SUFFIX,chatgptvideo.xyz,Global
 HOST-SUFFIX,chatgptvideob.buzz,Global
@@ -6670,7 +6726,6 @@ HOST-SUFFIX,discuss4u.com,Global
 HOST-SUFFIX,discussionsapple.com,Global
 HOST-SUFFIX,dish.com,Global
 HOST-SUFFIX,dishworld.com,Global
-HOST-SUFFIX,diskstation.me,Global
 HOST-SUFFIX,disney-asia.com,Global
 HOST-SUFFIX,disney-discount.com,Global
 HOST-SUFFIX,disney-plus.net,Global
@@ -7119,17 +7174,11 @@ HOST-SUFFIX,drweb.fr,Global
 HOST-SUFFIX,drweb.kz,Global
 HOST-SUFFIX,drweb.ru,Global
 HOST-SUFFIX,drweb.uz,Global
-HOST-SUFFIX,dscloud.biz,Global
-HOST-SUFFIX,dscloud.me,Global
-HOST-SUFFIX,dscloud.mobi,Global
 HOST-SUFFIX,dscn.info,Global
 HOST-SUFFIX,dsex.to,Global
 HOST-SUFFIX,dslr.net,Global
 HOST-SUFFIX,dslreports.com,Global
 HOST-SUFFIX,dsmtp.com,Global
-HOST-SUFFIX,dsmynas.com,Global
-HOST-SUFFIX,dsmynas.net,Global
-HOST-SUFFIX,dsmynas.org,Global
 HOST-SUFFIX,dssott.com,Global
 HOST-SUFFIX,dstk.dk,Global
 HOST-SUFFIX,dswz88.xyz,Global
@@ -7150,7 +7199,6 @@ HOST-SUFFIX,dubaihotties.org,Global
 HOST-SUFFIX,dubox.com,Global
 HOST-SUFFIX,duck.co,Global
 HOST-SUFFIX,duck.com,Global
-HOST-SUFFIX,duckdns.org,Global
 HOST-SUFFIX,duckduckco.com,Global
 HOST-SUFFIX,duckduckco.de,Global
 HOST-SUFFIX,duckduckgo.ca,Global
@@ -7299,13 +7347,7 @@ HOST-SUFFIX,dynamopackages.com,Global
 HOST-SUFFIX,dynamoreach.com,Global
 HOST-SUFFIX,dynawebinc.com,Global
 HOST-SUFFIX,dyncdn.me,Global
-HOST-SUFFIX,dyndns-ip.com,Global
-HOST-SUFFIX,dyndns-pics.com,Global
-HOST-SUFFIX,dyndns.org,Global
-HOST-SUFFIX,dyndns.pro,Global
 HOST-SUFFIX,dynssl.com,Global
-HOST-SUFFIX,dynu.com,Global
-HOST-SUFFIX,dynu.net,Global
 HOST-SUFFIX,dysfz.cc,Global
 HOST-SUFFIX,dyttapi.com,Global
 HOST-SUFFIX,dyttapis.com,Global
@@ -8436,9 +8478,6 @@ HOST-SUFFIX,family-sex.me,Global
 HOST-SUFFIX,family-simulator.io,Global
 HOST-SUFFIX,family.co.jp,Global
 HOST-SUFFIX,family.com.tw,Global
-HOST-SUFFIX,familyds.com,Global
-HOST-SUFFIX,familyds.net,Global
-HOST-SUFFIX,familyds.org,Global
 HOST-SUFFIX,familyfed.org,Global
 HOST-SUFFIX,familymart.com.my,Global
 HOST-SUFFIX,familymart.com.ph,Global
@@ -8652,6 +8691,7 @@ HOST-SUFFIX,feacbooke.com,Global
 HOST-SUFFIX,feacebook.com,Global
 HOST-SUFFIX,feanonlinear.com,Global
 HOST-SUFFIX,featurecam.com,Global
+HOST-SUFFIX,featuregates.org,Global
 HOST-SUFFIX,fecbbok.com,Global
 HOST-SUFFIX,fecbooc.com,Global
 HOST-SUFFIX,fecbook.com,Global
@@ -9395,8 +9435,6 @@ HOST-SUFFIX,fring.com,Global
 HOST-SUFFIX,fringenetwork.com,Global
 HOST-SUFFIX,frishoes.com,Global
 HOST-SUFFIX,fritchy.com,Global
-HOST-SUFFIX,from-pr.com,Global
-HOST-SUFFIX,from-sd.com,Global
 HOST-SUFFIX,fromchinatousa.net,Global
 HOST-SUFFIX,frommel.net,Global
 HOST-SUFFIX,frontiersin.org,Global
@@ -10120,7 +10158,6 @@ HOST-SUFFIX,gongyichuangyi.net,Global
 HOST-SUFFIX,gonike.com,Global
 HOST-SUFFIX,gonzo-movies.com,Global
 HOST-SUFFIX,gonzo.com,Global
-HOST-SUFFIX,goo.gl,Global
 HOST-SUFFIX,goo.gle,Global
 HOST-SUFFIX,goo.ne.jp,Global
 HOST-SUFFIX,good-gay.com,Global
@@ -10200,7 +10237,6 @@ HOST-SUFFIX,google.co.vi,Global
 HOST-SUFFIX,google.co.za,Global
 HOST-SUFFIX,google.co.zm,Global
 HOST-SUFFIX,google.co.zw,Global
-HOST-SUFFIX,google.com,Global
 HOST-SUFFIX,google.com.af,Global
 HOST-SUFFIX,google.com.ag,Global
 HOST-SUFFIX,google.com.ai,Global
@@ -10379,10 +10415,8 @@ HOST-SUFFIX,google.ws,Global
 HOST-SUFFIX,googleacquisitionmigration.com,Global
 HOST-SUFFIX,googleadapis.com,Global
 HOST-SUFFIX,googleadservices-cn.com,Global
-HOST-SUFFIX,googleadservices.com,Global
 HOST-SUFFIX,googleanalytics.com,Global
 HOST-SUFFIX,googleapis-cn.com,Global
-HOST-SUFFIX,googleapis.com,Global
 HOST-SUFFIX,googleapps-cn.com,Global
 HOST-SUFFIX,googleapps.com,Global
 HOST-SUFFIX,googlearth.com,Global
@@ -10430,7 +10464,6 @@ HOST-SUFFIX,googletagmanager.com,Global
 HOST-SUFFIX,googletagservices-cn.com,Global
 HOST-SUFFIX,googletraveladservices-cn.com,Global
 HOST-SUFFIX,googletraveladservices.com,Global
-HOST-SUFFIX,googleusercontent.com,Global
 HOST-SUFFIX,googlevads-cn.com,Global
 HOST-SUFFIX,googleventures.com,Global
 HOST-SUFFIX,googleweblight.com,Global
@@ -10464,7 +10497,6 @@ HOST-SUFFIX,gostosanovinha.com,Global
 HOST-SUFFIX,got-game.org,Global
 HOST-SUFFIX,gotblop.com,Global
 HOST-SUFFIX,gotcosmos.com,Global
-HOST-SUFFIX,gotdns.ch,Global
 HOST-SUFFIX,gotgayporn.com,Global
 HOST-SUFFIX,gotgeeks.com,Global
 HOST-SUFFIX,gothdporn.com,Global
@@ -10562,7 +10594,6 @@ HOST-SUFFIX,gsearch.media,Global
 HOST-SUFFIX,gslink.us,Global
 HOST-SUFFIX,gsrc.io,Global
 HOST-SUFFIX,gstatic-cn.com,Global
-HOST-SUFFIX,gstatic.com,Global
 HOST-SUFFIX,gsuite.com,Global
 HOST-SUFFIX,gt536.top,Global
 HOST-SUFFIX,gtm.oasisfeng.com,Global
@@ -11274,7 +11305,6 @@ HOST-SUFFIX,homedepot-static.com,Global
 HOST-SUFFIX,homedepot.com,Global
 HOST-SUFFIX,homefuckingmovies.com,Global
 HOST-SUFFIX,homegrownfreaks.net,Global
-HOST-SUFFIX,homeip.net,Global
 HOST-SUFFIX,homemade-porn-video.com,Global
 HOST-SUFFIX,homemadeamateur.com,Global
 HOST-SUFFIX,homemadeanalporn.com,Global
@@ -11319,7 +11349,6 @@ HOST-SUFFIX,hoover.org,Global
 HOST-SUFFIX,hoovers.com,Global
 HOST-SUFFIX,hopedialogue.org,Global
 HOST-SUFFIX,hopstop.tv,Global
-HOST-SUFFIX,hopto.org,Global
 HOST-SUFFIX,horizontal-llc.com,Global
 HOST-SUFFIX,horizontal-systems.com,Global
 HOST-SUFFIX,horizontalglue.com,Global
@@ -11344,7 +11373,6 @@ HOST-SUFFIX,horsedick.net,Global
 HOST-SUFFIX,horsedicks.net,Global
 HOST-SUFFIX,horsemecum.com,Global
 HOST-SUFFIX,horseporn.tv,Global
-HOST-SUFFIX,host.livekit.cloud,Global
 HOST-SUFFIX,hostborneo.org,Global
 HOST-SUFFIX,hosting.co.uk,Global
 HOST-SUFFIX,hostloc.com,Global
@@ -11814,7 +11842,6 @@ HOST-SUFFIX,i-part.com.tw,Global
 HOST-SUFFIX,i-scmp.com,Global
 HOST-SUFFIX,i.org,Global
 HOST-SUFFIX,i1.hk,Global
-HOST-SUFFIX,i234.me,Global
 HOST-SUFFIX,i2p2.de,Global
 HOST-SUFFIX,i2runner.com,Global
 HOST-SUFFIX,i69.com.tw,Global
@@ -12844,7 +12871,6 @@ HOST-SUFFIX,ironpython.net,Global
 HOST-SUFFIX,ironsocket.com,Global
 HOST-SUFFIX,irotv301.top,Global
 HOST-SUFFIX,irribay.com,Global
-HOST-SUFFIX,is-a-hunter.com,Global
 HOST-SUFFIX,is.gd,Global
 HOST-SUFFIX,isaacmao.com,Global
 HOST-SUFFIX,isasecret.com,Global
@@ -13892,6 +13918,7 @@ HOST-SUFFIX,latibet.org,Global
 HOST-SUFFIX,latinaabuse.com,Global
 HOST-SUFFIX,latintubeporn.com,Global
 HOST-SUFFIX,latticedata.com,Global
+HOST-SUFFIX,launchdarkly.com,Global
 HOST-SUFFIX,launchpad.net,Global
 HOST-SUFFIX,launchpad.wang,Global
 HOST-SUFFIX,launchpadcontent.net,Global
@@ -16101,7 +16128,6 @@ HOST-SUFFIX,mydati.com,Global
 HOST-SUFFIX,mydirectgroove.com,Global
 HOST-SUFFIX,mydirectvchannels.com,Global
 HOST-SUFFIX,mydirtyhobby.com,Global
-HOST-SUFFIX,myds.me,Global
 HOST-SUFFIX,myeasytv.com,Global
 HOST-SUFFIX,myebay.com,Global
 HOST-SUFFIX,myeclipseide.com,Global
@@ -16183,8 +16209,6 @@ HOST-SUFFIX,mymoe.moe,Global
 HOST-SUFFIX,mymom.info,Global
 HOST-SUFFIX,mymusclevideo.com,Global
 HOST-SUFFIX,mymusic.net.tw,Global
-HOST-SUFFIX,mynetav.net,Global
-HOST-SUFFIX,mynetav.org,Global
 HOST-SUFFIX,mynetname.net,Global
 HOST-SUFFIX,mynike.com,Global
 HOST-SUFFIX,mynumber.org,Global
@@ -16214,7 +16238,6 @@ HOST-SUFFIX,mypornvid.fun,Global
 HOST-SUFFIX,mypornwap.fun,Global
 HOST-SUFFIX,myproseries.com,Global
 HOST-SUFFIX,myq2.com,Global
-HOST-SUFFIX,myqnapcloud.com,Global
 HOST-SUFFIX,myradio.com.hk,Global
 HOST-SUFFIX,myradio.hk,Global
 HOST-SUFFIX,myreadingmanga.info,Global
@@ -16927,7 +16950,6 @@ HOST-SUFFIX,nmsl.website,Global
 HOST-SUFFIX,nna.jp,Global
 HOST-SUFFIX,nnews.eu,Global
 HOST-SUFFIX,no-ip.com,Global
-HOST-SUFFIX,no-ip.org,Global
 HOST-SUFFIX,nobel.se,Global
 HOST-SUFFIX,nobelprize.org,Global
 HOST-SUFFIX,nobodycanstop.us,Global
@@ -17341,6 +17363,7 @@ HOST-SUFFIX,okinawabank.co.jp,Global
 HOST-SUFFIX,okk.tw,Global
 HOST-SUFFIX,okkisokuho.com,Global
 HOST-SUFFIX,okpool.me,Global
+HOST-SUFFIX,okta.com,Global
 HOST-SUFFIX,okx-dns.com,Global
 HOST-SUFFIX,okx-dns1.com,Global
 HOST-SUFFIX,okx-dns2.com,Global
@@ -20146,6 +20169,8 @@ HOST-SUFFIX,seesmic.com,Global
 HOST-SUFFIX,seeurlpcl.com,Global
 HOST-SUFFIX,seevpn.com,Global
 HOST-SUFFIX,seezone.net,Global
+HOST-SUFFIX,segment.com,Global
+HOST-SUFFIX,segment.io,Global
 HOST-SUFFIX,sego8.cc,Global
 HOST-SUFFIX,sego8.co,Global
 HOST-SUFFIX,sego8.xyz,Global
@@ -20164,7 +20189,6 @@ HOST-SUFFIX,selectyourgame.com,Global
 HOST-SUFFIX,selfloversworld.com,Global
 HOST-SUFFIX,sellclassics.com,Global
 HOST-SUFFIX,sellercommunity.com,Global
-HOST-SUFFIX,sellersprite.com,Global
 HOST-SUFFIX,sellics.com,Global
 HOST-SUFFIX,semanticscholar.org,Global
 HOST-SUFFIX,sena.co.kr,Global
@@ -20178,6 +20202,7 @@ HOST-SUFFIX,sensorynetworks.com,Global
 HOST-SUFFIX,sensualgirls.org,Global
 HOST-SUFFIX,sensualmothers.com,Global
 HOST-SUFFIX,sensueel.net,Global
+HOST-SUFFIX,sentry.io,Global
 HOST-SUFFIX,senzuritv.net,Global
 HOST-SUFFIX,seqing.one,Global
 HOST-SUFFIX,seqingwangzhan.pro,Global
@@ -20190,7 +20215,6 @@ HOST-SUFFIX,serialssolutions.com,Global
 HOST-SUFFIX,serlucap.lol,Global
 HOST-SUFFIX,serlutv258.xyz,Global
 HOST-SUFFIX,servebom.com,Global
-HOST-SUFFIX,servehttp.com,Global
 HOST-SUFFIX,servercontrolpanel.de,Global
 HOST-SUFFIX,serverfault.com,Global
 HOST-SUFFIX,serverlesslibrary.net,Global
@@ -21094,7 +21118,6 @@ HOST-SUFFIX,sora6.com,Global
 HOST-SUFFIX,sorairi.info,Global
 HOST-SUFFIX,sorazone.net,Global
 HOST-SUFFIX,sorcerersarena.com,Global
-HOST-SUFFIX,sorftime.com,Global
 HOST-SUFFIX,sorting-algorithms.com,Global
 HOST-SUFFIX,sos.org,Global
 HOST-SUFFIX,sos44.com,Global
@@ -21423,6 +21446,8 @@ HOST-SUFFIX,static.fun,Global
 HOST-SUFFIX,static9.net.au,Global
 HOST-SUFFIX,statically.io,Global
 HOST-SUFFIX,staticflickr.com,Global
+HOST-SUFFIX,statsig.com,Global
+HOST-SUFFIX,statsigapi.net,Global
 HOST-SUFFIX,statsmakemecry.com,Global
 HOST-SUFFIX,statueofdemocracy.org,Global
 HOST-SUFFIX,statuspage.io,Global
@@ -21755,13 +21780,11 @@ HOST-SUFFIX,synaptic.net,Global
 HOST-SUFFIX,syncback.com,Global
 HOST-SUFFIX,synergyse.com,Global
 HOST-SUFFIX,synology.com,Global
-HOST-SUFFIX,synology.me,Global
 HOST-SUFFIX,synologydownload.com,Global
 HOST-SUFFIX,synologyupdate.com,Global
 HOST-SUFFIX,syosetu.com,Global
 HOST-SUFFIX,sysinternals.com,Global
 HOST-SUFFIX,sysresccd.org,Global
-HOST-SUFFIX,sytes.net,Global
 HOST-SUFFIX,syx86.com,Global
 HOST-SUFFIX,syzbj36.xyz,Global
 HOST-SUFFIX,szabadeuropa.hu,Global
@@ -22923,7 +22946,6 @@ HOST-SUFFIX,turbotax.com,Global
 HOST-SUFFIX,turbotwitter.com,Global
 HOST-SUFFIX,turkeyblocks.org,Global
 HOST-SUFFIX,turkistantimes.com,Global
-HOST-SUFFIX,turn.livekit.cloud,Global
 HOST-SUFFIX,turntable.fm,Global
 HOST-SUFFIX,tushy.com,Global
 HOST-SUFFIX,tushycash.com,Global
@@ -24761,7 +24783,6 @@ HOST-SUFFIX,wisevid.com,Global
 HOST-SUFFIX,wish.com,Global
 HOST-SUFFIX,wistia.com,Global
 HOST-SUFFIX,wistia.net,Global
-HOST-SUFFIX,withgoogle.com,Global
 HOST-SUFFIX,witnessleeteaching.com,Global
 HOST-SUFFIX,witopia.net,Global
 HOST-SUFFIX,wix-code.com,Global
@@ -26035,7 +26056,6 @@ HOST-SUFFIX,zaobao.com.sg,Global
 HOST-SUFFIX,zaobao.sg,Global
 HOST-SUFFIX,zaozon.com,Global
 HOST-SUFFIX,zapper.fi,Global
-HOST-SUFFIX,zapto.org,Global
 HOST-SUFFIX,zatrahal.online,Global
 HOST-SUFFIX,zattoo.com,Global
 HOST-SUFFIX,zavat.pw,Global
@@ -26239,3 +26259,45 @@ HOST-SUFFIX,zzgays.com,Global
 HOST-SUFFIX,zzitube.com,Global
 HOST-SUFFIX,zzux.com,Global
 HOST-SUFFIX,zzycdz.com,Global
+
+# ===========================================================================
+# 【已停用】家用 DDNS / NAS 动态域名 —— v8 注释保留，去掉 # 即恢复
+# ===========================================================================
+# 停用理由：切 FINAL=direct 后，这些后缀会把家中群晖 / QNAP / 内网穿透的流量
+#           推去海外节点。设备在国内、人在国内，绕地球一圈是纯损失。
+# 恢复场景：若你有【海外】自建服务挂在 duckdns / dynu / no-ip 等动态域名上，
+#           把对应那一行的 # 去掉即可。不要整段恢复。
+# HOST-SUFFIX,blogdns.org,Global
+# HOST-SUFFIX,diskstation.me,Global
+# HOST-SUFFIX,dscloud.biz,Global
+# HOST-SUFFIX,dscloud.me,Global
+# HOST-SUFFIX,dscloud.mobi,Global
+# HOST-SUFFIX,dsmynas.com,Global
+# HOST-SUFFIX,dsmynas.net,Global
+# HOST-SUFFIX,dsmynas.org,Global
+# HOST-SUFFIX,duckdns.org,Global
+# HOST-SUFFIX,dyndns-ip.com,Global
+# HOST-SUFFIX,dyndns-pics.com,Global
+# HOST-SUFFIX,dyndns.org,Global
+# HOST-SUFFIX,dyndns.pro,Global
+# HOST-SUFFIX,dynu.com,Global
+# HOST-SUFFIX,dynu.net,Global
+# HOST-SUFFIX,familyds.com,Global
+# HOST-SUFFIX,familyds.net,Global
+# HOST-SUFFIX,familyds.org,Global
+# HOST-SUFFIX,from-pr.com,Global
+# HOST-SUFFIX,from-sd.com,Global
+# HOST-SUFFIX,gotdns.ch,Global
+# HOST-SUFFIX,homeip.net,Global
+# HOST-SUFFIX,hopto.org,Global
+# HOST-SUFFIX,i234.me,Global
+# HOST-SUFFIX,is-a-hunter.com,Global
+# HOST-SUFFIX,myds.me,Global
+# HOST-SUFFIX,mynetav.net,Global
+# HOST-SUFFIX,mynetav.org,Global
+# HOST-SUFFIX,myqnapcloud.com,Global
+# HOST-SUFFIX,no-ip.org,Global
+# HOST-SUFFIX,servehttp.com,Global
+# HOST-SUFFIX,synology.me,Global
+# HOST-SUFFIX,sytes.net,Global
+# HOST-SUFFIX,zapto.org,Global
