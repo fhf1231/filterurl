@@ -1,60 +1,136 @@
 # NAME: Mainland China Direct
-# AUTHOR: fhf1231 (based on blackmatrix7, cleaned & optimized)
-# UPDATED: 2026-08-19  (v9)
+# UPDATED: 2026-09-18  (v11)
+#
+# ===========================================================================
+# 本表的作用
+# ===========================================================================
+# 主配置的决策顺序：[filter_local] → 本表 → GEOIP/FINAL。
+# 本表是【唯一承担国内路由的大表】—— 国内站点没进本表 = 落到 FINAL, Global
+# 走海外代理。对银行网银 / 券商 / 电商后台而言这不是"慢一点"：检测到海外出口
+# IP 可能直接触发风控、锁定交易或强制二次验证。
 #
 # ---------------------------------------------------------------------------
-# v9 新增 19 条 —— 补齐国内主流站点覆盖缺口
+# ⚠️ 关于 HOST-SUFFIX,cn —— 保留，绝对不要删
 # ---------------------------------------------------------------------------
-# 【为什么重要】国内站点没进本表 = 落到 FINAL, Global 走海外代理。
-# 对银行网银 / 券商 App 而言这不是"慢一点"：检测到海外出口 IP 可能直接触发
-# 风控、锁定交易或强制二次验证。
-#
-# 直播/微信  wxlivecdn.com  tlivesource.com  huyacdn.com  huyaimg.com
-#            kuaishoupay.com  chenzhongtech.com
-# 银行       cqcbank.com(重庆)  bankofshanghai.com(上海)  srcb.com(上海农商)  bjrcb.com(北京农商)
-# 证券/理财  citics.com(中信)  cmschina.com(招商)  tiantianfunds.com(天天基金)  licaimofang.com
-# 云/工具    tencentcloud.com  volcengine.com(火山引擎)
-# 生活       dewu.com / poizon.com(得物)  ke.com(贝壳)
-#
-# 注：工行/中行/兴业/浦发/民生/华夏/北京银行/南京银行等 .com.cn 与 .cn 域名，
-#     以及 10086.cn / gov.cn / 12306.cn，均已由 HOST-SUFFIX,cn 兜底覆盖，无需单列。
-# DESCRIPTION: 国内域名直连白名单。本表是当前架构中唯一真正承担路由决策的大表。
-#
-# ---------------------------------------------------------------------------
-# v7 变更
-# ---------------------------------------------------------------------------
-# [删除] HOST-SUFFIX,ms,China
-#        .ms 是蒙特塞拉特（Montserrat）国家顶级域，与中国业务无关。
-#        该条会把全部 .ms 域名强制判为直连。
-# [删除] HOST-SUFFIX,in.th,China
-#        .in.th 是泰国的二级公共后缀（eTLD），同上属超范围误判。
-#
-# ---------------------------------------------------------------------------
-# ⚠️ 关于 HOST-SUFFIX,cn —— 保留，不要删
-# ---------------------------------------------------------------------------
-# 主配置 v6 头部曾声称 "已彻底移除 HOST-SUFFIX,cn 假白名单"，与事实不符：
-# 该条一直存在，且本表已把所有 .cn 子域全部剪枝（本表 .cn 结尾条目数 = 0），
-# 完全依赖这一条兜底。删除它会把全部 .cn 域名推给 FINAL,Global 走代理。
-# 另需澄清：HOST-SUFFIX 不触发 DNS 解析，此条与 "DNS 泄露" 无关，
-# 它的真实性质是 "覆盖面过宽"，需要代理的 .cn 域名请在 [filter_local] 显式改判
+# 本表已把所有 .cn 子域全部剪枝（.cn 结尾条目数 = 0），完全依赖这一条兜底。
+# 删除它会把全部 .cn 域名推给 FINAL, Global 走代理 —— 银行、政务、12306、
+# 运营商全部沦陷。
+# 澄清：HOST-SUFFIX 不触发 DNS 解析，此条与"DNS 泄露"无关；它的真实性质是
+# "覆盖面过宽"。需要代理的 .cn 域名请在主配置 [filter_local] 显式改判
 # （主配置已为 ip111.cn 做了改判示例）。
 #
-# ---------------------------------------------------------------------------
-# ⚠️ 待人工确认（v7 未改动，仅标注）
-# ---------------------------------------------------------------------------
-# L~2385 msauth.net / L~2387 msecnd.net / L~2389 msocdn.com
-#        Microsoft 全球认证与 CDN 域名。21Vianet(世纪互联)租户直连正确；
-#        国际版 M365 租户直连可能导致登录握手变慢或失败，按你的租户类型决定。
-# mpg.de / uni-bielefeld.de / classix-unlimited.co.uk
-#        德国马普所、比勒费尔德大学、英国站点，疑似来自开源镜像站列表的污染。
-#        直连可用但速度慢，无安全风险，保留与否随意。
-# icbc.* / ctrip.co.* / jd.* / tmall.ru / joybuy.es 等
-#        中资企业海外站点，直连为刻意设计，非缺陷。
+# ===========================================================================
+# 变更记录
+# ===========================================================================
 #
-# HOST: 19
-# HOST-SUFFIX: 3710
-# HOST-WILDCARD: 1
-# TOTAL: 3730
+# --- (2026-09-18) 删除 12 条：海外服务误判 / 宽通配 / 失效死链 ---
+#
+#   A. 剔除海外服务误判（防黑屏 / 握手超时 / 封号）
+#     tiktokd.net / tiktokd.org
+#       TikTok 国内被封禁且服务端对中国大陆 IP 锁区，直连黑屏甚至封号。
+#     cloudflareprod.com / cloudflarestaging.com / cloudflarestoragegw.com
+#       Cloudflare 海外生产 / 预发布 / R2 对象存储网关，直连受 GFW 丢包阻断。
+#       注：中国版 cloudflare-cn.com 等仍保留，勿一并删除。
+#     trellocdn.com
+#       Trello 静态资源 CDN。主站走 Global，静态资源误判直连会出口分裂、白屏。
+#     steamcommunity-a.akamaihd.net
+#       Steam 社区头像与资料 CDN，国内被 SNI 阻断，直连必挂。
+#
+#   B. 剔除宽通配安全隐患
+#     HOST-WILDCARD, windows-*.net
+#       匹配任何 windows-*.net 独立域名，覆盖面失控且增加匹配开销。
+#       微软合法子域已由 HOST-SUFFIX,windows.net 覆盖。
+#
+#   C. 清理失效死链与国际组织
+#     wooyun.org      乌云漏洞平台，2016 年已永久关闭
+#     rarbg.to        海外 BT 站，2023 年 5 月停运
+#     un.org / worldbank.org   国际组织，非国内业务，与 v10 删除的 imf.org 同类
+#
+# --- (2026-09-17) 删除 11 条 + 新增 16 条 ---
+#
+#   删除 A：与主配置冲突（5 条）
+#     adobesc.com / aliexpress.com / aliexpress.ru / kwcdn.com / lazada.com
+#     主配置 §8b 判 Global(代理)，本表判 China(直连)，同一域名两套相反策略。
+#     原先靠「filter_local 优先于 filter_remote」生效，但在【分流优化】开启时
+#     两边同为 HOST-SUFFIX、精度相同，孰先孰后无文档保证。改为单点定义。
+#     ⚠️ 勿再加回 —— 主配置那份带业务注释，是唯一定义处。
+#
+#   删除 B：IP 检测站分类错误（2 条）
+#     myip.la          与主配置冲突，且判直连会验不出真实出口
+#     whatismyip.com   美国站点被判 China。用它验证代理会看到自己的中国真实 IP，
+#                      从而误判「代理没生效」。主配置已对 ip111.cn / myip.la 改判。
+#
+#   删除 C：直连实测不可达（1 条）
+#     imf.org          实测 www.imf.org 直连 6 秒超时，删除后走代理反而可用。
+#
+#   删除 D：结构瑕疵（3 条）
+#     origin-a.akamaihd.ne            .ne 是尼日尔国家域名，系 .net 漏字母；
+#                                     正确的 .net 版本本表已有
+#     hz.pre.tbusergw.taobao.net      预发布(pre)环境域名
+#     uat1.bfsspadserver.8le8le.com   UAT 测试环境域名
+#
+#   新增：跨境电商垂直行业 SaaS（16 条）
+#     缺口成因：本表源自通用国内列表，为普通用户设计，不含跨境电商行业 SaaS。
+#     实测覆盖率：ERP/卖家工具 1/14、收款/跨境金融 1/7，而 VPS运维 13/13、
+#     生活常用 12/12 —— 缺口精准落在卖家的核心业务上。
+#     未收录 = 用美国 IP 登录国内 SaaS 后台，触发异地登录风控。
+#
+#     收款（优先级最高，涉及资金操作）
+#       lianlianpay.com  连连支付      pingpongx.com  PingPong
+#       oceanpayment.com 钱海
+#     ERP / 卖家工具
+#       lingxing.com     领星ERP       dianxiaomi.com  店小秘
+#       mabangerp.com    马帮ERP       saihu.com       赛狐ERP
+#       ziniao.com       紫鸟浏览器    sellersprite.com 卖家精灵
+#       chanmama.com     蝉妈妈        sorftime.com    Sorftime 选品
+#       wanyilian.com    万邑通
+#     物流 / 办公
+#       zto.com  中通    4px.com  递四方    yunexpress.com  云途    processon.com
+#
+#     全部经 HTTP 实测确认域名真实存在，已按字母序归位，无重复。
+#
+# ===========================================================================
+# 已评估但【刻意保留 / 不收录】的决策 —— 勿重复讨论
+# ===========================================================================
+#
+# 【刻意不收录的国际公司】走代理更合适：
+#   payoneer.com(美国) / airwallex.com(澳洲·香港) / xmind.net(新加坡) /
+#   larkoffice.com(飞书国际版，307 跳转 feishu.cn，服务器在海外)
+#   待确认：worldfirst.com 万里汇 —— 原英国公司 2019 被蚂蚁收购，使用 Cloudflare。
+#           若实际使用国内版后台，域名可能不同，建议从 QX 日志确认后再决定。
+#
+# 【看似国外、实测可直连，故保留】：
+#   oracle.com / java.com / sony.com / supercell.com / garmin.com / weather.com /
+#   xboxlive.com / outlook.com / office365.com / sharepoint.com / visualstudio.com /
+#   tawk.to / gandi.net —— 真实端点全部实测可达，判 China 不构成故障。
+#   msauth.net / msecnd.net / msocdn.com（历史标注的"待人工确认"项）：
+#     实测 login.microsoftonline.com 直连 302 / 0.38s 正常，国际版租户亦可用。
+#
+# 【⚠️ 看似国外、实为 Apple / CA 资产，绝不可删】：
+#   mzstatic.com / aaplimg.com / me.com   —— Apple 的 CDN 与 iCloud 邮箱域
+#   alphassl.com / startssl.com           —— 证书 CA 的 OCSP 端点
+#
+# 【约 50 条学术数据库 + 约 16 条国外 PT 站】：
+#   来自校园网场景（靠 IP 认证走机构订阅）。实测 9/10 与 8/10 可直连，不会坏；
+#   对非校园网用户属死条目，无害，故不删。
+#
+# 【Microsoft 账号出口"分裂"—— 已核实为误报，无需处理】：
+#   表面上 login.microsoftonline.com 走 China 而 login.live.com 走 Global，
+#   像是鉴权分裂。但 Microsoft 有两套互不相干的账号体系：
+#     MSA 个人账号      → login.live.com            → 走 Global
+#     AAD 工作/学校账号 → login.microsoftonline.com → 走 China
+#   两组端点不会被同一账号同时使用，不构成 accounts.google.com 那种分裂。
+#   2026-09-17 本机实测：Edge 为 MSA 个人账号，Office 未登录，
+#   Outlook/Teams/OneDrive 未安装 —— 走 China 的 5 个全是 AAD 端点，永不命中。
+#
+# ===========================================================================
+# 规则统计
+# ===========================================================================
+#   HOST:          17
+#   HOST-SUFFIX:   3706
+#   HOST-WILDCARD: 0
+#   TOTAL:         3723
+# ===========================================================================
 
 HOST,analytics.strava.com,China
 HOST,blzddist1-a.akamaihd.net,China
@@ -67,16 +143,12 @@ HOST,images-cn.ssl-images-amazon.com,China
 HOST,ip.istatmenus.app,China
 HOST,kc.kexinshe.com,China
 HOST,ntservicepack.microsoft.com,China
-HOST,origin-a.akamaihd.ne,China
 HOST,origin-a.akamaihd.net,China
 HOST,smart.uhdnow.com,China
 HOST,sms.imagetasks.com,China
-HOST,steamcommunity-a.akamaihd.net,China
 HOST,tx.lilyemby.com,China
 HOST,www.libvideo.com,China
 HOST,www.yxssp.com,China
-
-# === HOST-SUFFIX 后缀通配（覆盖全部移动 App 与 CDN）===
 HOST-SUFFIX,00cdn.com,China
 HOST-SUFFIX,0123456789.com,China
 HOST-SUFFIX,0379home.com,China
@@ -242,6 +314,7 @@ HOST-SUFFIX,4399youpai.com,China
 HOST-SUFFIX,4399youxi.com,China
 HOST-SUFFIX,4399yyy.com,China
 HOST-SUFFIX,4paradigm.com,China
+HOST-SUFFIX,4px.com,China
 HOST-SUFFIX,500.com,China
 HOST-SUFFIX,500d.me,China
 HOST-SUFFIX,5054399.com,China
@@ -373,7 +446,6 @@ HOST-SUFFIX,acs.org,China
 HOST-SUFFIX,acwing.com,China
 HOST-SUFFIX,adimages.sina.com.hk,China
 HOST-SUFFIX,admin5.com,China
-HOST-SUFFIX,adobesc.com,China
 HOST-SUFFIX,adxvip.com,China
 HOST-SUFFIX,af-south-1.myhuaweicloud.com,China
 HOST-SUFFIX,afdian.net,China
@@ -437,8 +509,6 @@ HOST-SUFFIX,alicloudapi.com,China
 HOST-SUFFIX,alicloudccp.com,China
 HOST-SUFFIX,alidayu.com,China
 HOST-SUFFIX,alidns.com,China
-HOST-SUFFIX,aliexpress.com,China
-HOST-SUFFIX,aliexpress.ru,China
 HOST-SUFFIX,alifanyi.com,China
 HOST-SUFFIX,alihealth.hk,China
 HOST-SUFFIX,aliimg.com,China
@@ -822,6 +892,7 @@ HOST-SUFFIX,changanfunds.com,China
 HOST-SUFFIX,changba.com,China
 HOST-SUFFIX,changdunovel.com,China
 HOST-SUFFIX,changyan.com,China
+HOST-SUFFIX,chanmama.com,China
 HOST-SUFFIX,chaojituzi.net,China
 HOST-SUFFIX,chaoxing.cc,China
 HOST-SUFFIX,chaoxing.com,China
@@ -947,9 +1018,6 @@ HOST-SUFFIX,clouddongying.com,China
 HOST-SUFFIX,cloudflare-cn.com,China
 HOST-SUFFIX,cloudflarecn.net,China
 HOST-SUFFIX,cloudflareinsights-cn.com,China
-HOST-SUFFIX,cloudflareprod.com,China
-HOST-SUFFIX,cloudflarestaging.com,China
-HOST-SUFFIX,cloudflarestoragegw.com,China
 HOST-SUFFIX,cloudfoshan.com,China
 HOST-SUFFIX,cloudfront-cn.net,China
 HOST-SUFFIX,cloudfuqing.com,China
@@ -1199,6 +1267,7 @@ HOST-SUFFIX,diandian.com,China
 HOST-SUFFIX,diandianqi.com,China
 HOST-SUFFIX,dianping.com,China
 HOST-SUFFIX,dianwannan.com,China
+HOST-SUFFIX,dianxiaomi.com,China
 HOST-SUFFIX,dida365.com,China
 HOST-SUFFIX,didi-food.com,China
 HOST-SUFFIX,didialift.com,China
@@ -1732,7 +1801,6 @@ HOST-SUFFIX,hwtrip.com,China
 HOST-SUFFIX,hxcdn.net,China
 HOST-SUFFIX,hxfy888.com,China
 HOST-SUFFIX,hxsd.com,China
-HOST-SUFFIX,hz.pre.tbusergw.taobao.net,China
 HOST-SUFFIX,hz.tbusergw.taobao.net,China
 HOST-SUFFIX,i360mall.com,China
 HOST-SUFFIX,i3839.com,China
@@ -1834,7 +1902,6 @@ HOST-SUFFIX,im2maker.com,China
 HOST-SUFFIX,im9.com,China
 HOST-SUFFIX,imcapptest.com,China
 HOST-SUFFIX,imedao.com,China
-HOST-SUFFIX,imf.org,China
 HOST-SUFFIX,img4399.com,China
 HOST-SUFFIX,img4me.com,China
 HOST-SUFFIX,imgo.tv,China
@@ -2166,7 +2233,6 @@ HOST-SUFFIX,kuyiso.com,China
 HOST-SUFFIX,kuyunbo.club,China
 HOST-SUFFIX,kwai.com,China
 HOST-SUFFIX,kwaizt.com,China
-HOST-SUFFIX,kwcdn.com,China
 HOST-SUFFIX,la-north-2.myhuaweicloud.com,China
 HOST-SUFFIX,la-south-2.myhuaweicloud.com,China
 HOST-SUFFIX,lady8844.com,China
@@ -2207,7 +2273,6 @@ HOST-SUFFIX,larsonlimited.com,China
 HOST-SUFFIX,lascn.net,China
 HOST-SUFFIX,lawxp.com,China
 HOST-SUFFIX,lawyee.org,China
-HOST-SUFFIX,lazada.com,China
 HOST-SUFFIX,lczq.com,China
 HOST-SUFFIX,ld246.com,China
 HOST-SUFFIX,ldmnq.com,China
@@ -2233,6 +2298,7 @@ HOST-SUFFIX,lf-rc1.yhgfb-cn-static.com,China
 HOST-SUFFIX,lhzq.com,China
 HOST-SUFFIX,liangxinyao.com,China
 HOST-SUFFIX,lianjia.com,China
+HOST-SUFFIX,lianlianpay.com,China
 HOST-SUFFIX,lianmishu.com,China
 HOST-SUFFIX,liantu.com,China
 HOST-SUFFIX,lianzhuli.com,China
@@ -2250,6 +2316,7 @@ HOST-SUFFIX,likuso.com,China
 HOST-SUFFIX,lingkou.com,China
 HOST-SUFFIX,linglonglife.com,China
 HOST-SUFFIX,lingshoujia.com,China
+HOST-SUFFIX,lingxing.com,China
 HOST-SUFFIX,linkvans.com,China
 HOST-SUFFIX,linsn.com,China
 HOST-SUFFIX,linuxidc.com,China
@@ -2314,6 +2381,7 @@ HOST-SUFFIX,m1.run,China
 HOST-SUFFIX,m6.run,China
 HOST-SUFFIX,m9.run,China
 HOST-SUFFIX,ma.run,China
+HOST-SUFFIX,mabangerp.com,China
 HOST-SUFFIX,madsrevolution.net,China
 HOST-SUFFIX,mafengwo.com,China
 HOST-SUFFIX,mafengwo.net,China
@@ -2472,7 +2540,6 @@ HOST-SUFFIX,myhwcdn.com,China
 HOST-SUFFIX,myhwcloudlive.com,China
 HOST-SUFFIX,myhwclouds.com,China
 HOST-SUFFIX,myilibrary.com,China
-HOST-SUFFIX,myip.la,China
 HOST-SUFFIX,myoppo.com,China
 HOST-SUFFIX,mypaas.com,China
 HOST-SUFFIX,myqcloud.com,China
@@ -2532,6 +2599,7 @@ HOST-SUFFIX,nzwgs.com,China
 HOST-SUFFIX,oadz.com,China
 HOST-SUFFIX,oascentral.sina.com.hk,China
 HOST-SUFFIX,oceanengine.com,China
+HOST-SUFFIX,oceanpayment.com,China
 HOST-SUFFIX,ocwms.com,China
 HOST-SUFFIX,oecd-ilibrary.org,China
 HOST-SUFFIX,oeeee.com,China
@@ -2627,6 +2695,7 @@ HOST-SUFFIX,pinduoduo.net,China
 HOST-SUFFIX,pingan.com,China
 HOST-SUFFIX,pingan.com.hk,China
 HOST-SUFFIX,pingplusplus.com,China
+HOST-SUFFIX,pingpongx.com,China
 HOST-SUFFIX,pingwest.com,China
 HOST-SUFFIX,pingxx.com,China
 HOST-SUFFIX,pintu360.com,China
@@ -2649,6 +2718,7 @@ HOST-SUFFIX,pptbest.com,China
 HOST-SUFFIX,pptv.com,China
 HOST-SUFFIX,prestodb-china.com,China
 HOST-SUFFIX,privatehd.to,China
+HOST-SUFFIX,processon.com,China
 HOST-SUFFIX,proquest.com,China
 HOST-SUFFIX,proximabeta.com,China
 HOST-SUFFIX,psbc.com,China
@@ -2777,7 +2847,6 @@ HOST-SUFFIX,qyerstatic.com,China
 HOST-SUFFIX,qyunapp.com,China
 HOST-SUFFIX,qzone.com,China
 HOST-SUFFIX,rainclassroom.com,China
-HOST-SUFFIX,rarbg.to,China
 HOST-SUFFIX,raychase.net,China
 HOST-SUFFIX,rdfybk.com,China
 HOST-SUFFIX,readnovel.com,China
@@ -2816,6 +2885,7 @@ HOST-SUFFIX,saasops.tech,China
 HOST-SUFFIX,saayaa.com,China
 HOST-SUFFIX,sagepub.com,China
 HOST-SUFFIX,saibo.com,China
+HOST-SUFFIX,saihu.com,China
 HOST-SUFFIX,sandai.net,China
 HOST-SUFFIX,sanguosha.com,China
 HOST-SUFFIX,sankuai.com,China
@@ -2837,6 +2907,7 @@ HOST-SUFFIX,seasungames.com,China
 HOST-SUFFIX,sec-wiki.com,China
 HOST-SUFFIX,secec.com,China
 HOST-SUFFIX,segmentfault.com,China
+HOST-SUFFIX,sellersprite.com,China
 HOST-SUFFIX,sencdn.com,China
 HOST-SUFFIX,seniverse.com,China
 HOST-SUFFIX,senlinjimore.com,China
@@ -2938,6 +3009,7 @@ HOST-SUFFIX,solidot.org,China
 HOST-SUFFIX,somode.com,China
 HOST-SUFFIX,sony.com,China
 HOST-SUFFIX,sonyentertainmentnetwork.com,China
+HOST-SUFFIX,sorftime.com,China
 HOST-SUFFIX,soso.com,China
 HOST-SUFFIX,sou.com,China
 HOST-SUFFIX,soufunimg.com,China
@@ -3137,8 +3209,6 @@ HOST-SUFFIX,tiebaimg.com,China
 HOST-SUFFIX,tietuku.com,China
 HOST-SUFFIX,tiexue.net,China
 HOST-SUFFIX,tieyou.com,China
-HOST-SUFFIX,tiktokd.net,China
-HOST-SUFFIX,tiktokd.org,China
 HOST-SUFFIX,timedoo.com,China
 HOST-SUFFIX,timibase.com,China
 HOST-SUFFIX,timmerse.com,China
@@ -3196,7 +3266,6 @@ HOST-SUFFIX,touzid.com,China
 HOST-SUFFIX,tpyzq.com,China
 HOST-SUFFIX,tracup.com,China
 HOST-SUFFIX,travelsky.com,China
-HOST-SUFFIX,trellocdn.com,China
 HOST-SUFFIX,trip.com,China
 HOST-SUFFIX,tripcdn.com,China
 HOST-SUFFIX,trunktech.com,China
@@ -3228,7 +3297,6 @@ HOST-SUFFIX,u.tools,China
 HOST-SUFFIX,u17.com,China
 HOST-SUFFIX,u17i.com,China
 HOST-SUFFIX,u17t.com,China
-HOST-SUFFIX,uat1.bfsspadserver.8le8le.com,China
 HOST-SUFFIX,ubssdic.com,China
 HOST-SUFFIX,ubuntukylin.com,China
 HOST-SUFFIX,ucbug.com,China
@@ -3274,7 +3342,6 @@ HOST-SUFFIX,umengcloud.com,China
 HOST-SUFFIX,umetrip.com,China
 HOST-SUFFIX,umsns.com,China
 HOST-SUFFIX,umtrack.com,China
-HOST-SUFFIX,un.org,China
 HOST-SUFFIX,unaming.info,China
 HOST-SUFFIX,unaming.net,China
 HOST-SUFFIX,uni-bielefeld.de,China
@@ -3356,6 +3423,7 @@ HOST-SUFFIX,wannianli8.com,China
 HOST-SUFFIX,wanplus.com,China
 HOST-SUFFIX,wanwan4399.com,China
 HOST-SUFFIX,wanwushuo.com,China
+HOST-SUFFIX,wanyilian.com,China
 HOST-SUFFIX,wanyiwang.com,China
 HOST-SUFFIX,wanyx.com,China
 HOST-SUFFIX,wbimg.com,China
@@ -3402,7 +3470,6 @@ HOST-SUFFIX,wework-studio.com,China
 HOST-SUFFIX,wf.pub,China
 HOST-SUFFIX,wfdata.club,China
 HOST-SUFFIX,whalecloud.com,China
-HOST-SUFFIX,whatismyip.com,China
 HOST-SUFFIX,whccb.com,China
 HOST-SUFFIX,whlovehome.com,China
 HOST-SUFFIX,wicresoft.com,China
@@ -3435,10 +3502,8 @@ HOST-SUFFIX,wolai.com,China
 HOST-SUFFIX,womai.com,China
 HOST-SUFFIX,wondercv.com,China
 HOST-SUFFIX,wonnder.com,China
-HOST-SUFFIX,wooyun.org,China
 HOST-SUFFIX,woozooo.com,China
 HOST-SUFFIX,worktile.com,China
-HOST-SUFFIX,worldbank.org,China
 HOST-SUFFIX,worldscientific.com,China
 HOST-SUFFIX,woyaogexing.com,China
 HOST-SUFFIX,woyoo.com,China
@@ -3663,6 +3728,7 @@ HOST-SUFFIX,yundaex.com,China
 HOST-SUFFIX,yundasys.com,China
 HOST-SUFFIX,yundun.com,China
 HOST-SUFFIX,yundzh.com,China
+HOST-SUFFIX,yunexpress.com,China
 HOST-SUFFIX,yunfancdn.com,China
 HOST-SUFFIX,yunify.com,China
 HOST-SUFFIX,yunjiasu-cdn.net,China
@@ -3755,6 +3821,7 @@ HOST-SUFFIX,zijiecdn.net,China
 HOST-SUFFIX,zijieimg.com,China
 HOST-SUFFIX,zimuzu.io,China
 HOST-SUFFIX,zimuzu.tv,China
+HOST-SUFFIX,ziniao.com,China
 HOST-SUFFIX,ziroom.com,China
 HOST-SUFFIX,ziroomapartment.com,China
 HOST-SUFFIX,zixiaomao.com,China
@@ -3775,6 +3842,7 @@ HOST-SUFFIX,zrblog.net,China
 HOST-SUFFIX,zsxq.com,China
 HOST-SUFFIX,zszq.com,China
 HOST-SUFFIX,ztfsec.com,China
+HOST-SUFFIX,zto.com,China
 HOST-SUFFIX,zuche.com,China
 HOST-SUFFIX,zuchecdn.com,China
 HOST-SUFFIX,zuhaowan.com,China
@@ -3787,6 +3855,3 @@ HOST-SUFFIX,zuoyebang.com,China
 HOST-SUFFIX,zybang.com,China
 HOST-SUFFIX,zyh365.com,China
 HOST-SUFFIX,zzdtec.com,China
-
-# === HOST-WILDCARD ===
-HOST-WILDCARD,windows-*.net,China
